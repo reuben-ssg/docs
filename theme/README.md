@@ -22,6 +22,20 @@ Extract when the Tokyo Night theme (`reuben-ssg/theme-nvim`) exists, so there ar
 - [ ] Point the docs site's `theme` at it.
 - [ ] Delete `theme/` from the docs repo.
 
+## Using the theme
+
+- `layout: home` gives a page the header and footer with no sidebar; every other page uses `default`.
+- A page inside a top-level `content/` folder gets that collection's tree as a sidebar and a breadcrumb.
+- A page with three or more `h2`s gets an "on this page" list.
+- The layout adds the page title as the `h1` unless the body has its own.
+- `[params]` keys the theme reads: `nav_order` (collection or root-level page slugs, in order), `repo_url` and `license` (footer).
+- A collection's index page can set `nav_title` to shorten its header link; a root-level page's link is its slug with a capital first letter.
+- `data/release.toml` `version` fills the "Now serving" ticket.
+- Includes for content: `logo()` and `sandwich()`.
+- Classes for content: `hero`, `hero-art`, `btn-row`, `btn`, `btn-alt`, `cards`, `card`, `order-label`, `install`, `ticket`.
+
+The favicons draw Pacifico's R as an outline path, since an SVG favicon can't load a web font.
+
 ## Fonts
 
 Fonts are self-hosted from `static/fonts/` and each carries its OFL licence file.

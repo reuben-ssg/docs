@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 600 220" width="600" height="220" role="img" aria-label="Reuben">
+<!-- The wordmark as a standalone file. Pages inline it with the `logo()` include instead, so it uses the page's
+     Pacifico. Opened directly, this file loads Pacifico from ../fonts/; used as an <img>, browsers block that
+     request and show a fallback script font. -->
+<style>
+@font-face { font-family: "Pacifico"; src: url("../fonts/Pacifico-Regular.ttf") format("truetype"); }
+text { font-family: "Pacifico", cursive; }
+.wm-border { fill: #ffffff; stroke: #ffffff; stroke-width: 22px; stroke-linejoin: round; }
+.wm-shadow { fill: #2a1420; stroke: #2a1420; stroke-width: 22px; stroke-linejoin: round; }
+.wm-fill { fill: #e0177a; stroke: #e0177a; stroke-width: 5px; stroke-linejoin: round; }
+.shine { fill: #ffffff; }
+</style>
+<defs>
+<path id="arc" d="M190 150 Q 360 112 560 140"/>
+<g id="glyphs">
+<text x="40" y="168" font-size="168" transform="skewX(-10)">R</text>
+<text font-size="112"><textPath xlink:href="#arc">euben</textPath></text>
+</g>
+<clipPath id="glyph-clip"><use xlink:href="#glyphs"/></clipPath>
+</defs>
+<g transform="translate(7 8)"><use xlink:href="#glyphs" class="wm-shadow"/></g>
+<use xlink:href="#glyphs" class="wm-border"/>
+<use xlink:href="#glyphs" class="wm-fill"/>
+<g clip-path="url(#glyph-clip)">
+<rect class="shine" x="78" y="44" width="40" height="15" rx="7.5" transform="rotate(-24 98 52)"/>
+<circle class="shine" cx="128" cy="40" r="6"/>
+<rect class="shine" x="402" y="62" width="20" height="10" rx="5" transform="rotate(-20 412 67)"/>
+<circle class="shine" cx="430" cy="58" r="3.5"/>
+</g>
+</svg>

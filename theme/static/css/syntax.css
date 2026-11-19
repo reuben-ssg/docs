@@ -1,0 +1,61 @@
+/* Token colours for Reuben's `hl-` highlighting classes, on Pumpernickel code blocks.
+   Every colour is at least 4.5 : 1 against Pumpernickel (#2A1420); the ratios are in the theme's contrast table. */
+
+.hl-code {
+  color: var(--swiss); /* 15.39 : 1 */
+}
+
+.hl-comment {
+  color: #c4aeba; /* 8.29 : 1 */
+  font-style: italic;
+}
+
+.hl-keyword,
+.hl-storage,
+.hl-entity.hl-other.hl-attribute-name,
+.hl-markup.hl-heading {
+  color: var(--mustard); /* 11.88 : 1 */
+}
+
+.hl-string,
+.hl-markup.hl-raw {
+  color: var(--dressing); /* 6.13 : 1 */
+}
+
+.hl-constant,
+.hl-entity.hl-name.hl-tag {
+  color: #ff8fc0; /* 8.15 : 1 */
+}
+
+.hl-entity.hl-name.hl-function,
+.hl-support.hl-function,
+.hl-meta.hl-function-call {
+  color: #8fd3ff; /* 10.60 : 1 */
+}
+
+.hl-storage.hl-type,
+.hl-entity.hl-name.hl-type,
+.hl-support.hl-type,
+.hl-support.hl-class,
+.hl-entity.hl-name.hl-class {
+  color: #ffb3d9; /* 10.42 : 1 */
+}
+
+.hl-variable.hl-parameter,
+.hl-markup.hl-inserted {
+  color: #b8e986; /* 12.33 : 1 */
+}
+
+.hl-markup.hl-deleted,
+.hl-invalid {
+  color: var(--dressing); /* 6.13 : 1 */
+  text-decoration: underline wavy;
+}
+
+.hl-markup.hl-bold {
+  font-weight: 500;
+}
+
+.hl-markup.hl-italic {
+  font-style: italic;
+}

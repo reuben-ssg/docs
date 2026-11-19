@@ -1,14 +1,24 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ page.title }} · {{ site.title }}</title>
-<link rel="stylesheet" href="/css/tokens.css">
+{{ head(page, site) }}
 </head>
 <body>
-<main>
+{{ skip_link() }}
+{{ header(page, site, data, collections) }}
+<div class="{{ if page.collection == "" { "page" } else { "page has-sidebar" } }}">
+{{ sidebar(page, collections) }}
+<main id="main" tabindex="-1">
+{{ breadcrumb(page, collections) }}
+{{ title_heading(page, content) }}
+<div class="page-body">
+{{ on_this_page(page) }}
+<div class="prose">
 {{ content }}
+</div>
+</div>
 </main>
+</div>
+{{ footer(site) }}
 </body>
 </html>
