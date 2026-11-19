@@ -1,0 +1,7 @@
+title = "Reuben"
+base_url = "https://reuben-ssg.dev/"
+theme = "theme"
+
+[params]
+nav_order = ["guide", "reference", "add-ons", "contributing"]
+repo_url = "https://github.com/reuben-ssg/reuben"
