@@ -14,7 +14,7 @@ layout: home
 Markdown with Rhai scripting stacked inside, every build error served in one run, and not a crumb of JavaScript on the side.
 
 <div class="btn-row">
-<a class="btn" href="{{ url_for("@/quickstart.md") }}">Quickstart</a>
+<a class="btn" href="/quickstart/">Quickstart</a>
 <a class="btn btn-alt" href="#features">Why Reuben?</a>
 </div>
 
