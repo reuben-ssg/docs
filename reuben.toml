@@ -8,3 +8,7 @@ theme = "theme"
 nav_order = ["quickstart", "guide", "configuration", "theming", "add-ons", "contributing"]
 repo_url = "https://github.com/reuben-ssg/reuben"
 license = "MIT OR Apache-2.0"
+
+# The guide's pages set `weight`, which orders the sidebar.
+[collections.guide]
+sort = "weight"

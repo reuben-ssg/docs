@@ -22,6 +22,8 @@ It looks for these files and folders in the site root.
 | `layouts/`     | HTML layouts that wrap pages.                                                                     |
 | `dist/`        | The output. `reuben build` writes it, and you can change it with `--out`.                         |
 
+The Feature guide explains how pages use these folders: [Data](@/guide/data.md) covers `data/`, [Includes](@/guide/includes.md) covers `includes/`, and [Layouts](@/guide/layouts.md) covers `layouts/`.
+
 Reuben ignores files and folders under `content/` whose names start with a dot.
 It never publishes `.DS_Store`, `Thumbs.db`, `.swp` files or files whose names end in `~`.
 
@@ -86,7 +88,7 @@ A page then reads it as `{{ site.params.tagline }}`.
 
 ### collections
 
-A collection is a top-level folder of `content/` that holds at least one page.
+A [collection](@/guide/collections.md) is a top-level folder of `content/` that holds at least one page.
 Pages directly in `content/`, such as `index.md`, belong to no collection.
 To change how a collection behaves, add a table named after its folder:
 
@@ -148,6 +150,7 @@ Unknown keys in `[css]` are errors too.
 ### a11y
 
 Every build checks each page against 12 accessibility rules.
+[Accessibility checks](@/guide/checks.md) describes each rule.
 List rule ids under `a11y.disable` to switch rules off for the whole site:
 
 ```toml
@@ -298,6 +301,7 @@ error: content/index.md: layout `missing` not found in the site or its theme
 ```
 
 A layout name can't contain `/`, `\` or `..`.
+[Layouts](@/guide/layouts.md) shows how to write a layout.
 
 ### Drafts
 
@@ -335,7 +339,7 @@ A `draft` in a `_dir.toml` must be `true` or `false`, or Reuben reports this err
 
 A `_dir.toml` that fails to load is reported against its own file, and Reuben doesn't repeat the problem on every page below it.
 
-To see which file set each value, run `reuben explain`.
+To see which file set each value, run `reuben explain`, which [Explaining a page](@/guide/explain.md) describes.
 For example, suppose `content/guide/intro.md` starts like this:
 
 ```markdown

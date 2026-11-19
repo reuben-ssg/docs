@@ -58,7 +58,7 @@ A theme only adds a second place for Reuben to look.
 
 ## Write a layout
 
-A layout is an HTML file in `layouts/` that wraps a page.
+A [layout](@/guide/layouts.md) is an HTML file in `layouts/` that wraps a page.
 Reuben picks the layout from the page's front matter `layout` field, then from its collection's `layout` setting, and then falls back to a layout named `default`.
 [Configuration](@/configuration.md#layouts) describes that order and the errors you get when a layout is missing.
 
@@ -94,7 +94,7 @@ A layout can read these names:
 | `collections` | Every collection, by name.                                                         |
 
 A layout can also call any include function and any built-in helper, and it sees the variables a page's sidecar script sets.
-A sidecar script is a `.rhai` file next to a page, with the same name, that runs before the page's blocks and whose top-level variables the page can use.
+A [sidecar script](@/guide/sidecars.md) is a `.rhai` file next to a page, with the same name, that runs before the page's blocks and whose top-level variables the page can use.
 
 The output of a `{{ }}` block is escaped as HTML, so `{{ page.title }}` is safe to use in text and attributes.
 `content` is already HTML, so Reuben doesn't escape it.
@@ -105,7 +105,7 @@ Reuben's accessibility checks look for them in the built page, as the rules `mai
 
 ## Write an include
 
-An include is a Rhai file in `includes/` that defines functions.
+An [include](@/guide/includes.md) is a Rhai file in `includes/` that defines functions.
 Reuben loads every `.rhai` file directly in the folder, not in subfolders, before it renders any page.
 Any layout or page can then call the functions.
 

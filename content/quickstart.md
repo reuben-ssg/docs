@@ -105,13 +105,14 @@ Go back to the [home page](@/index.md).
 Each page starts with front matter between two `---` lines.
 Every page needs a `title`.
 
-The `{{ site.title }}` in the home page is a Rhai block.
+The `{{ site.title }}` in the home page is a [Rhai block](@/guide/rhai-blocks.md).
 Reuben runs the expression when it builds the page and puts the result in its place.
 Here the result is the `title` from `reuben.toml`.
 
 A link that starts with `@/` names a page by its source file under `content/`.
 Reuben writes the page's real URL into the built site.
 If you rename or move the page, Reuben reports every link that no longer resolves.
+[Linking to pages](@/guide/linking.md) describes every form of source link.
 
 With the npm route, your folder now looks like this, with `node_modules/` left out:
 
@@ -233,10 +234,11 @@ Reuben names the file, the line and a likely fix.
 When a site has several errors, Reuben reports all of them in one run.
 Change the link back before you go on.
 
-`reuben check` also reports accessibility findings, such as a heading that skips a level.
+`reuben check` also reports [accessibility findings](@/guide/checks.md), such as a heading that skips a level.
 It exits with status 0 only when it finds no errors and no findings, so you can use it in a CI job.
 
 ## Next steps
 
+- The [Feature guide](@/guide/index.md) explains Rhai blocks, sidecar scripts, includes, data, collections, layouts, linking and checks, each with an example.
 - [Configuration](@/configuration.md) lists every `reuben.toml` key, every front matter field and every command with its flags.
 - [Theming](@/theming.md) explains how to give the site its own layouts, includes and static files.
