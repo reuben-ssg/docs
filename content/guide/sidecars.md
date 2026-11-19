@@ -8,7 +8,7 @@ A sidecar script is a `.rhai` file that sits next to a page and has the same nam
 Reuben runs it before it runs the page's blocks, and every top-level variable the script creates becomes available to the page and to its layout.
 
 Use a sidecar when a page needs more than a one-line expression.
-Sorting data, building a list and picking a value all fit better in a script than in a block.
+Sorting data, building a list, and picking a value all fit better in a script than in a block.
 
 ## Add a sidecar
 
@@ -25,7 +25,7 @@ Suppose `data/jobs.json` holds this list:
 ]
 ```
 
-This sidecar, `content/resume.rhai`, sorts the jobs newest first, picks the latest one and builds a Markdown list:
+This sidecar, `content/resume.rhai`, sorts the jobs newest first, picks the latest one, and builds a Markdown list:
 
 ```rhai
 let jobs = data.jobs.sort_by("-year");
@@ -61,7 +61,7 @@ Reuben builds `dist/resume/index.html`, and its `<main>` holds:
 ```
 
 The script reads `data.jobs` because every file in `data/` is available as `data`, as [Data](@/guide/data.md) explains.
-It builds the list with a template string, which is text between backticks that can hold `${ }` expressions.
+It builds the list with a [template string](https://rhai.rs/book/), which is text between backticks that can hold `${ }` expressions.
 Then it calls `markdown()`, which turns the Markdown list into HTML.
 The page outputs that HTML as it is.
 
@@ -69,7 +69,7 @@ The page outputs that HTML as it is.
 
 A sidecar sees the same names as a page's blocks:
 
-- `page`, `site`, `data` and `collections`, which are fixed for the script, so it can read them but not change them.
+- `page`, `site`, `data`, and `collections`, which are fixed for the script, so it can read them but not change them.
 - Every function from [Includes](@/guide/includes.md), and the built-in helpers listed in [Rhai blocks](@/guide/rhai-blocks.md#what-a-block-can-use).
 
 A sidecar has no output of its own.
@@ -93,7 +93,7 @@ For the example above, `dist/` holds `resume/index.html` and no `resume.rhai`.
 
 ## Errors
 
-A sidecar error names the script's own file, line and column:
+A sidecar error names the script's own file, line, and column:
 
 ```text
 error: Array index 5 out of bounds: only 2 elements in array
@@ -105,10 +105,13 @@ Found 1 error in 1 file
 ```
 
 A syntax error or a failing call is reported the same way.
-[`reuben explain`](@/guide/explain.md) lists every variable a sidecar set, with the line that set it:
+[`reuben explain`](@/guide/explain.md) lists every variable a sidecar set, with the line that set it.
+Here are the sidecar rows for the example above.
+A value that is HTML, such as `job_list`, shows as its type, `reuben_core::script::Html`.
 
 ```text
 jobs             [2 items]                                                        content/resume.rhai:1
 latest           #{"name": "Pastry chef", "year": 2022}                           content/resume.rhai:2
+list             "- Pastry chef, 2022\n- Line cook, 2019\n"                       content/resume.rhai:4
 job_list         reuben_core::script::Html                                        content/resume.rhai:8
 ```

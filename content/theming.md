@@ -3,7 +3,7 @@ title: Theming
 description: How Reuben themes work, what a theme folder holds, and how a site overrides its theme.
 ---
 
-A theme is a folder of layouts, includes and static files that gives a site its look.
+A theme is a folder of layouts, includes, and static files that gives a site its look.
 This page explains what goes in a theme folder, how Reuben combines a theme with your site, and how your site overrides it.
 It covers Reuben 0.1.1.
 You need a site that builds, so start with the [Quickstart](@/quickstart.md) if you don't have one.
@@ -52,7 +52,7 @@ If the path isn't a folder, Reuben stops the build and names it:
 error: reuben.toml: config: theme `./nope` is not a directory
 ```
 
-A site without a `theme` setting can still have its own `layouts/`, `includes/` and `static/` folders.
+A site without a `theme` setting can still have its own `layouts/`, `includes/`, and `static/` folders.
 They work the same way.
 A theme only adds a second place for Reuben to look.
 
@@ -88,8 +88,8 @@ A layout can read these names:
 | Name          | What it holds                                                                      |
 | ------------- | ---------------------------------------------------------------------------------- |
 | `content`     | The page's body, already built into HTML.                                          |
-| `page`        | The page's front matter, plus `url`, `path`, `slug`, `collection` and `toc`.       |
-| `site`        | The site's `title`, `base_url` and `params`.                                       |
+| `page`        | The page's front matter, plus `url`, `path`, `slug`, `collection`, and `toc`.       |
+| `site`        | The site's `title`, `base_url`, and `params`.                                       |
 | `data`        | The files in `data/`.                                                              |
 | `collections` | Every collection, by name.                                                         |
 
@@ -100,8 +100,8 @@ The output of a `{{ }}` block is escaped as HTML, so `{{ page.title }}` is safe 
 `content` is already HTML, so Reuben doesn't escape it.
 To output HTML you built yourself, wrap it in the `raw()` helper.
 
-The layout is also where you add the `<main>` landmark, the `lang` attribute and a `<title>`.
-Reuben's accessibility checks look for them in the built page, as the rules `main-landmark`, `html-lang` and `page-title`.
+The layout is also where you add the `<main>` landmark, the `lang` attribute, and a `<title>`.
+Reuben's accessibility checks look for them in the built page, as the rules `main-landmark`, `html-lang`, and `page-title`.
 
 ## Write an include
 
@@ -217,7 +217,7 @@ Here `()` means that `footer` takes no parameters.
 ## When no layout exists
 
 If neither the site nor the theme has a layout for a page, and the page doesn't name one, Reuben wraps the page in a plain built-in page shell.
-The shell is semantic HTML with a `lang` attribute, a viewport tag, the page's `description` as a meta tag when it has one, a line of inline CSS and a `<main>` landmark.
+The shell is semantic HTML with a `lang` attribute, a viewport tag, the page's `description` as a meta tag when it has one, a line of inline CSS, and a `<main>` landmark.
 It has no JavaScript.
 It adds the page's title as an `h1` unless the body already has its own.
 
@@ -225,4 +225,4 @@ It adds the page's title as an `h1` unless the body already has its own.
 
 Reuben 0.1.1 has no theme manifest.
 It never reads a `theme.toml` file, so a `theme.toml` in a theme folder has no effect.
-A theme's name, version and license belong in the theme's own README.
+A theme's name, version, and license belong in the theme's own README.

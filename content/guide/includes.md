@@ -5,9 +5,9 @@ description: Write a Rhai function once and call it from any page or layout.
 ---
 
 An include is a Rhai file in `includes/` that defines functions.
-Reuben loads every include before it builds any page, so every page, sidecar script and layout can call the functions.
+Reuben loads every include before it builds any page, so every page, sidecar script, and layout can call the functions.
 
-Use an include for markup you repeat, such as a card, a button or a note.
+Use an include for markup you repeat, such as a card, a button, or a note.
 
 ## Write an include
 
@@ -33,7 +33,7 @@ fn card_row(cards) {
 }
 ```
 
-A function returns the value of its last expression.
+As in any [Rhai](https://rhai.rs/book/) function, the value of the last expression is the return value.
 Both functions return `raw(...)`, which marks the text as HTML so Reuben doesn't escape it when the page outputs it.
 Each one escapes its own inputs with `escape()` first, because an include is where a stray `&` or `<` in a title would otherwise reach the page.
 
@@ -83,8 +83,8 @@ Files load in sorted order, but order doesn't matter, because Reuben compiles ev
 
 ## What an include can see
 
-A function can read only its parameters and the built-in helpers.
-It can't read `page`, `site`, `data` or `collections`, and it can't read a page's variables.
+A function can read only its parameters, the built-in helpers, and other include functions.
+It can't read `page`, `site`, `data`, or `collections`, and it can't read a page's variables.
 Pass what the function needs, as `page_note(page)` does above.
 
 ## Override an include from a theme

@@ -6,8 +6,9 @@ description: Put computed values into a page with output blocks and setup blocks
 
 A Rhai block is a piece of code inside a page.
 Reuben runs it when it builds the page and puts the result in its place.
-Rhai is the small scripting language Reuben uses.
-You only need its expressions to start: numbers, text, lists and field access such as `page.title`.
+[Rhai](https://rhai.rs/book/) is the small scripting language Reuben uses.
+You only need its expressions to start: numbers, text, lists, and field access such as `page.title`.
+The Rhai book covers the whole language.
 
 There are two kinds of block.
 
@@ -19,7 +20,7 @@ There are two kinds of block.
 ## Output blocks
 
 An output block holds one expression, and the page shows its value.
-This page declares two tags in its front matter and prints them:
+This page declares three tags in its front matter and prints them:
 
 ```markdown
 ---
@@ -37,7 +38,7 @@ Sum: {{ 6 * 7 }}.
 {{ if count > 2 { "Many tags." } else { "Few tags." } }}
 ```
 
-Reuben builds it into this HTML:
+Reuben builds it into this HTML, and it turns the straight quotes in Markdown text into curly quotes:
 
 ```html
 <p>The page “Blocks demo” has 3 tags: SOUPSANDWICHPICKLE.</p>
@@ -65,8 +66,8 @@ Reuben turns the value of an output block into page content by its type:
 
 | Value                                   | What Reuben outputs                                                           |
 | --------------------------------------- | ----------------------------------------------------------------------------- |
-| Text                                    | The text, with `<`, `>`, `&`, `"` and `'` escaped. Reuben doesn't read it as Markdown. |
-| A number, `true` or `false`, or a character | Its text.                                                                 |
+| Text                                    | The text, with `<`, `>`, `&`, `"`, and `'` escaped. Reuben doesn't read it as Markdown. |
+| A number, `true` or `false`, or a character | Its text.                                                                |
 | The result of `raw()` or `markdown()`   | HTML, as it is.                                                               |
 | A list                                  | Each item in turn, with nothing between them.                                 |
 | `()`                                    | Nothing.                                                                      |
@@ -103,7 +104,7 @@ Every block on a page can read these names:
 | Name          | What it holds                                                          |
 | ------------- | ---------------------------------------------------------------------- |
 | `page`        | The page's front matter and its computed fields, such as `page.url`.  |
-| `site`        | The site's `title`, `base_url` and `params`.                           |
+| `site`        | The site's `title`, `base_url`, and `params`.                           |
 | `data`        | The files in `data/`. See [Data](@/guide/data.md).                     |
 | `collections` | Every collection. See [Collections](@/guide/collections.md).           |
 
@@ -112,17 +113,17 @@ A block can also use the variables the page's [sidecar script](@/guide/sidecars.
 | Helper                    | What it does                                                                 |
 | ------------------------- | ---------------------------------------------------------------------------- |
 | `raw(text)`               | Marks text as HTML, so Reuben doesn't escape it.                              |
-| `escape(text)`            | Escapes `<`, `>`, `&` and `"`, for text you put inside HTML you build by hand. |
+| `escape(text)`            | Escapes `<`, `>`, `&`, and `"`, for text you put inside HTML you build by hand. |
 | `markdown(text)`          | Renders Markdown text as HTML. It doesn't run `{{ }}` blocks inside the text. |
-| `list.sort_by(field)`     | Sorts a list of pages by a field. Put `-` before the name to reverse it.      |
-| `load_data(path)`         | Reads a `.json`, `.toml`, `.yaml` or `.yml` file inside the site.             |
+| `list.sort_by(field)`     | Sorts a list of maps, such as pages, by a field. Put `-` before the name to reverse it.      |
+| `load_data(path)`         | Reads a `.json`, `.toml`, `.yaml`, or `.yml` file inside the site.             |
 | `url_for(path)`           | Gives the URL of a page, from its source file. See [Linking to pages](@/guide/linking.md). |
 | `format_date(date, format)` | Formats a date, such as `format_date(page.date, "%B %Y")`.                  |
 
 ## Show a block without running it
 
 Reuben doesn't run blocks inside code.
-A fenced code block, an indented code block, inline code and math all stay as you wrote them.
+A fenced code block, an indented code block, inline code, and math all stay as you wrote them.
 That is how this page shows `{{ page.title }}` without printing a title.
 
 Everywhere else, including raw HTML in the page, Reuben runs the block.
@@ -140,7 +141,7 @@ A lone `}}` outside a block is plain text, so only the opening `{{` and `{%` nee
 
 ## Errors
 
-A block that fails is an error at the block's file, line and column.
+A block that fails is an error at the block's file, line, and column.
 Reuben reports every failing block in one run:
 
 ```text

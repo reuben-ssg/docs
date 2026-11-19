@@ -20,7 +20,7 @@ Reuben builds that into `<a href="/writing-guide/style/scope/#assumptions">`.
 There are two forms:
 
 - `@/path.md` starts at `content/`, so `@/writing-guide/style/scope.md` always means that file.
-- A relative path such as `scope.md`, `./scope.md` or `../style/scope.md` starts at the folder of the page that contains the link.
+- A relative path such as `scope.md`, `./scope.md`, or `../style/scope.md` starts at the folder of the page that contains the link.
 
 A destination is a source link when it starts with `@/`, or when it has no scheme, doesn't start with `/` or `#`, and its path ends in `.md`.
 A fragment such as `#assumptions` or a query such as `?x=1` stays as you wrote it.
@@ -38,7 +38,7 @@ This example site has a `base_url` of `https://example.test/sub/`.
 ```markdown
 Read the [introduction](@/guide/intro.md) or jump to its [setup section](@/guide/intro.md#setup).
 
-From a sibling page, a relative link works too: see [the next page](guide/next.md).
+A relative link works too: see [the next page](guide/next.md).
 
 A link with a query keeps it: [search](@/guide/intro.md?q=1).
 ```
@@ -58,7 +58,7 @@ The built `index.html` holds:
 
 ```html
 <p>Read the <a href="/sub/guide/intro/">introduction</a> or jump to its <a href="/sub/guide/intro/#setup">setup section</a>.</p>
-<p>From a sibling page, a relative link works too: see <a href="/sub/guide/next/">the next page</a>.</p>
+<p>A relative link works too: see <a href="/sub/guide/next/">the next page</a>.</p>
 <p>A link with a query keeps it: <a href="/sub/guide/intro/?q=1">search</a>.</p>
 ```
 
@@ -73,7 +73,7 @@ A Markdown link gets only the base path, such as `/sub/`, so the built site stay
 
 ## Link from a layout or an include
 
-A layout, an include or a block can't use Markdown link syntax, so call `url_for()` instead.
+A layout, an include, or a block can't use Markdown link syntax, so call `url_for()` instead.
 It takes the same forms, which is how you link from outside Markdown, such as a navigation bar:
 
 ```html

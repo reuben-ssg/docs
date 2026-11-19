@@ -1,16 +1,16 @@
 ---
 title: Data
 weight: 4
-description: Load JSON, TOML, YAML and Rhai files from data/ into every page and layout.
+description: Load JSON, TOML, YAML, and Rhai files from data/ into every page and layout.
 ---
 
-Reuben loads the files in `data/` into one value called `data`, which every page, layout and sidecar script can read.
-Use data for facts that don't belong in a page, such as a menu, a team list or a release number.
+Reuben loads the files in `data/` into one value called `data`, which every page, layout, and sidecar script can read.
+Use data for facts that don't belong in a page, such as a menu, a team list, or a release number.
 
 ## Add data files
 
 Put files in `data/`.
-Reuben reads files that end in `.json`, `.toml`, `.yaml`, `.yml` and `.rhai`, and it skips every other file.
+Reuben reads files that end in `.json`, `.toml`, `.yaml`, `.yml`, and `.rhai`, and it skips every other file.
 
 The file's path becomes its place in `data`.
 A file directly in `data/` becomes a key named after the file, without its extension.
@@ -79,7 +79,7 @@ Use a script to compute a value from the other data files.
 A data script sees two names:
 
 - `data`, which holds the plain data files, but not other data scripts.
-- `site`, which holds the site's `title`, `base_url` and `params`.
+- `site`, which holds the site's `title`, `base_url`, and `params`.
 
 This script, `data/stats.rhai`, returns a map:
 
@@ -109,7 +109,7 @@ Reuben escapes the apostrophe in the shop's name as `&#39;`, which browsers show
 ## Read a file on demand
 
 The `load_data(path)` helper reads one data file from a script or a block.
-The path is relative to the site root, and the file must end in `.json`, `.toml`, `.yaml` or `.yml`:
+The path is relative to the site root, and the file must end in `.json`, `.toml`, `.yaml`, or `.yml`:
 
 ```rhai
 let jobs = load_data("data/jobs.json");

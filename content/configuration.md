@@ -17,7 +17,7 @@ It looks for these files and folders in the site root.
 | `reuben.toml`  | The site configuration. It is optional.                                                           |
 | `content/`     | The pages, as Markdown files. Reuben copies other files in it to the output beside their pages, except `.rhai` sidecar scripts, which it never publishes, and files that start with front matter, which it renders as templates. |
 | `static/`      | Files Reuben copies to the root of the output, such as images and stylesheets. Files that start with front matter are rendered as templates, and CSS files named `_name.css` are import-only partials that Reuben never writes out. |
-| `data/`        | Data files (`.json`, `.toml`, `.yaml`, `.yml` and `.rhai`) that become the `data` value in pages. |
+| `data/`        | Data files (`.json`, `.toml`, `.yaml`, `.yml`, and `.rhai`) that become the `data` value in pages. |
 | `includes/`    | Rhai files (`.rhai`) whose functions pages and layouts can call.                                  |
 | `layouts/`     | HTML layouts that wrap pages.                                                                     |
 | `dist/`        | The output. `reuben build` writes it, and you can change it with `--out`.                         |
@@ -41,7 +41,7 @@ error: reuben.toml: config: unknown field `titel`, expected one of `title`, `bas
 | ------------- | ---------------- | ------------ | -------------------------------------------------------------------- |
 | `title`       | text             | empty        | The site title, available to scripts as `site.title`.                |
 | `base_url`    | text             | `"/"`        | The address the site is served from, available as `site.base_url`.   |
-| `theme`       | path             | none         | A folder of layouts, includes and static files.                      |
+| `theme`       | path             | none         | A folder of layouts, includes, and static files.                      |
 | `params`      | table            | empty        | Your own values, available to scripts as `site.params`.              |
 | `collections` | table of tables  | none         | Settings for the top-level folders of `content/`.                    |
 | `sitemap`     | true or false    | `true`       | Whether Reuben writes `sitemap.xml`.                                 |
@@ -305,8 +305,8 @@ A layout name can't contain `/`, `\` or `..`.
 
 ### Drafts
 
-A draft page is left out of `reuben build`, `reuben serve` and `reuben check` unless you pass `--drafts`.
-Reuben leaves a draft out of the sitemap, the collections and the navigation your theme builds from them.
+A draft page is left out of `reuben build`, `reuben serve`, and `reuben check` unless you pass `--drafts`.
+Reuben leaves a draft out of the sitemap, the collections, and the navigation your theme builds from them.
 A link to a draft page is an error when the drafts aren't built.
 
 A folder is a draft when its `_dir.toml` sets `draft = true`, or when the `index.md` inside it is a draft.
@@ -409,7 +409,7 @@ error: ../nonempty: output directory isn't empty and wasn't created by Reuben (n
 reuben serve [OPTIONS]
 ```
 
-`reuben serve` builds the site in memory, serves it, rebuilds when a file changes and reloads the browser.
+`reuben serve` builds the site in memory, serves it, rebuilds when a file changes, and reloads the browser.
 It writes nothing to `dist/`.
 
 | Option          | What it does                                                                    |
@@ -426,7 +426,7 @@ Reuben prints the address when the server starts:
 Serving at http://127.0.0.1:1111
 ```
 
-It watches `content/`, `includes/`, `layouts/`, `data/` and `static/`, the theme folder, `reuben.toml`, every `reuben.<name>.toml`, and the files that `include` pulls in.
+It watches `content/`, `includes/`, `layouts/`, `data/`, and `static/`, the theme folder, `reuben.toml`, every `reuben.<name>.toml`, and the files that `include` pulls in.
 After each rebuild it prints `Rebuilt 2 pages in 1 ms`.
 If a rebuild fails, Reuben prints the errors and keeps serving the last good build.
 If the first build fails, the server doesn't start and Reuben exits with status 1.
@@ -524,5 +524,5 @@ reuben css highlight [--theme <THEME>]
 Fenced code blocks in a known language build with `hl-` classes on their tokens.
 `reuben css highlight` prints the CSS for those classes.
 `--theme` takes a built-in theme name or the path to a `.tmTheme` file, and defaults to `base16-ocean.dark`.
-The built-in themes are `InspiredGitHub`, `Solarized (dark)`, `Solarized (light)`, `base16-eighties.dark`, `base16-mocha.dark`, `base16-ocean.dark` and `base16-ocean.light`.
+The built-in themes are `InspiredGitHub`, `Solarized (dark)`, `Solarized (light)`, `base16-eighties.dark`, `base16-mocha.dark`, `base16-ocean.dark`, and `base16-ocean.light`.
 Save the output in a stylesheet in your `static/` folder, or write your own rules for the same classes.

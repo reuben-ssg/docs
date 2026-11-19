@@ -1,9 +1,9 @@
 ---
 title: Quickstart
-description: Install Reuben, build a two-page site, preview it and check it.
+description: Install Reuben, build a two-page site, preview it, and check it.
 ---
 
-This page takes you from an empty folder to a built, previewed and checked two-page site.
+This page takes you from an empty folder to a built, previewed, and checked two-page site.
 You need a terminal and a text editor.
 You don't need to know Rust or Rhai.
 
@@ -230,7 +230,7 @@ error: no page `abuot.md`; did you mean `about.md`?
 Found 1 error in 1 file
 ```
 
-Reuben names the file, the line and a likely fix.
+Reuben names the file, the line, and a likely fix.
 When a site has several errors, Reuben reports all of them in one run.
 Change the link back before you go on.
 
@@ -239,6 +239,7 @@ It exits with status 0 only when it finds no errors and no findings, so you can 
 
 ## Next steps
 
-- The [Feature guide](@/guide/index.md) explains Rhai blocks, sidecar scripts, includes, data, collections, layouts, linking and checks, each with an example.
-- [Configuration](@/configuration.md) lists every `reuben.toml` key, every front matter field and every command with its flags.
-- [Theming](@/theming.md) explains how to give the site its own layouts, includes and static files.
+- The [Feature guide](@/guide/index.md) explains Rhai blocks, sidecar scripts, includes, data, collections, layouts, linking, and checks, each with an example.
+- [Explaining a page](@/guide/explain.md) shows how `reuben explain` lists every name a page can use and where each value came from.
+- [Configuration](@/configuration.md) lists every `reuben.toml` key, every front matter field, and every command with its flags.
+- [Theming](@/theming.md) explains how to give the site its own layouts, includes, and static files.

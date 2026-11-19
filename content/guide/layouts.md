@@ -33,7 +33,7 @@ This is `layouts/default.html`:
 </html>
 ```
 
-With `title = "Layouts demo"` and `tagline = "Fresh bread daily"` under `[params]` in `reuben.toml`, a page titled "Home" builds into this:
+With `title = "Layouts demo"` at the top of `reuben.toml` and `tagline = "Fresh bread daily"` under `[params]`, a page titled "Home" builds into this:
 
 ```html
 <!doctype html>
@@ -54,7 +54,7 @@ With `title = "Layouts demo"` and `tagline = "Fresh bread daily"` under `[params
 </html>
 ```
 
-A layout is where you add the `lang` attribute, the `<title>` and the `<main>` landmark.
+A layout is where you add the `lang` attribute, the `<title>`, and the `<main>` landmark.
 Reuben's [accessibility checks](@/guide/checks.md) look for all three in the built page.
 
 ## What a layout can read
@@ -65,7 +65,7 @@ A layout reads the same names as a page's blocks, and one more:
 | ------------- | ------------------------------------------------------------------------ |
 | `content`     | The page's body as HTML.                                                 |
 | `page`        | The page's front matter and its computed fields.                         |
-| `site`        | The site's `title`, `base_url` and `params`.                             |
+| `site`        | The site's `title`, `base_url`, and `params`.                             |
 | `data`        | The files in `data/`. See [Data](@/guide/data.md).                       |
 | `collections` | Every collection. See [Collections](@/guide/collections.md).             |
 
@@ -134,7 +134,7 @@ Reuben looks in the site's `layouts/` first and in the theme's `layouts/` second
 ## When there is no layout
 
 If a page names no layout and no `default` layout exists, Reuben wraps the page in a plain built-in page shell.
-The shell is a complete HTML page with a language, a `<title>`, a `<main>` landmark and one line of CSS.
+The shell is a complete HTML page with a language, a `<title>`, a `<main>` landmark, and one line of CSS.
 It adds the page's title as an `<h1>` unless the page's own body has one.
 
 ## Pages that aren't Markdown
@@ -159,11 +159,11 @@ Reuben publishes it as `dist/feed.xml` with the output escaped for XML:
 <feed><title>Fish &amp; Chips</title></feed>
 ```
 
-Output is escaped for `.html`, `.htm`, `.xml`, `.svg` and `.md` templates.
+Output is escaped for `.html`, `.htm`, `.xml`, and `.svg` templates.
 For any other extension, such as `.json` or `.txt`, Reuben writes strings as they are, so you have to produce valid output yourself.
 
 An `.html` template is published as a page at `dist/<name>/index.html`, so `content/hello.html` becomes `dist/hello/index.html`.
-Reuben doesn't wrap it in a layout, so the template has to hold the whole page, including `<html lang>`, a `<title>`, a `<main>` landmark and one `<h1>`.
+Reuben doesn't wrap it in a layout, so the template has to hold the whole page, including `<html lang>`, a `<title>`, a `<main>` landmark, and one `<h1>`.
 Reuben's [accessibility checks](@/guide/checks.md) warn about each one that is missing.
 Any other extension keeps its path, so `content/feed.xml` is `dist/feed.xml`.
 

@@ -31,22 +31,22 @@ You use the id in a finding and when you switch the rule off.
 | `form-label`        | Form controls have a label.                                        |
 | `link-target`       | Internal links point at a page or file that is built.              |
 
-The first five rules read the page's headings, links, images and tables.
-The last seven read the built HTML, including your layout, so a layout is where you fix `html-lang`, `page-title`, `single-h1` and `main-landmark`.
+The first five rules read the page's headings, links, images, and tables.
+The last seven read the built HTML, including your layout, so a layout is where you fix `html-lang`, `page-title`, `single-h1`, and `main-landmark`.
 
 Some rules have details you can rely on:
 
 - `heading-order` lets the first heading in a page's content be a level 2, because the layout supplies the page's `<h1>`.
-- `link-text` flags a link with no text, and a link whose text is only `click here`, `here`, `read more`, `more`, `learn more` or `link`.
+- `link-text` flags a link with no text, and a link whose text is only `click here`, `here`, `read more`, `more`, `learn more`, or `link`.
   Capital letters and trailing punctuation don't matter.
-- `form-label` accepts a wrapping `<label>`, a `<label for>` that matches the control's `id`, and a non-blank `aria-label`, `aria-labelledby` or `title`.
-  It skips hidden, submit, reset, button and image inputs, and disabled inputs.
+- `form-label` accepts a wrapping `<label>`, a `<label for>` that matches the control's `id`, and a non-blank `aria-label`, `aria-labelledby`, or `title`.
+  It skips hidden, submit, reset, button, and image inputs, and disabled inputs.
 - `main-landmark` accepts a `<main>` element or a `role="main"`.
 - `link-target` checks links that point into your site, and it skips external links, `mailto:` links and links that are only a `#fragment`.
 
 ## See the findings
 
-This page uses a bare layout that has no `lang`, no `<title>` text and no `<main>`.
+This page uses a bare layout that has no `lang`, no `<title>` text, and no `<main>`.
 The layout is `layouts/bare.html`:
 
 ```html
@@ -87,6 +87,7 @@ layout: bare
 <p id="dup">b</p>
 ```
 
+The site also has a clean `content/index.md` that says "Fine.", so Reuben builds two pages.
 `reuben build` prints a warning for each problem and still builds the site:
 
 ```text
@@ -197,8 +198,8 @@ error: reuben.toml: config: unknown accessibility rule `bogus`
 ```
 
 Switching rules off in all three places for the page above silences every finding.
-The site switches off `html-lang`, `page-title` and `main-landmark`.
-The folder `content/legacy/` switches off `single-h1`, `link-target`, `form-label` and `id-unique`.
+The site switches off `html-lang`, `page-title`, and `main-landmark`.
+The folder `content/legacy/` switches off `single-h1`, `link-target`, `form-label`, and `id-unique`.
 The page `content/legacy/problems.md` switches off the other five in its front matter:
 
 ```markdown

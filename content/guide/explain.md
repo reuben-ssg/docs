@@ -37,7 +37,21 @@ content/docs/order.md
 content/docs/order.rhai
 ```
 
-`reuben.toml` sets a title, an absolute `base_url`, a `params` value and a collection:
+`data/menu.json` lists two dishes:
+
+```json
+[{ "name": "Reuben", "price": 12 }, { "name": "Pickle plate", "price": 6 }]
+```
+
+`includes/badge.rhai` defines one function:
+
+```rhai
+fn badge(text) {
+    raw(`<span class="badge">${escape(text)}</span>`)
+}
+```
+
+`reuben.toml` sets a title, an absolute `base_url`, a `params` value, and a collection:
 
 ```toml
 title = "Deli docs"
@@ -99,11 +113,11 @@ helpers             raw, escape, markdown, sort_by, load_data, url_for, format_d
 ```
 
 The first line names the page's source file and its URL.
-Each row after it has three columns: the name, its value and its source.
+Each row after it has three columns: the name, its value, and its source.
 
 | Source                            | Meaning                                                              |
 | --------------------------------- | -------------------------------------------------------------------- |
-| `content/docs/order.md:4`         | A file and line, such as a front matter field, a config key or a sidecar variable. |
+| `content/docs/order.md:4`         | A file and line, such as a front matter field, a config key, or a sidecar variable. |
 | `content/docs/_dir.toml:1`        | A folder default. The page's own value wins when it sets the same field. |
 | `computed`                        | Reuben set the value itself, such as `page.url` and `page.toc`.      |
 | `collection docs`                 | A collection. The value is its page count.                           |
@@ -113,7 +127,7 @@ Each group of rows tells you something:
 
 - `page.*` rows hold the page's front matter fields first, and then Reuben's computed fields.
   `page.audience` shows that the folder's `_dir.toml` supplied a field the page never wrote.
-- `site.*` rows hold the site's title, base URL and each `params` value.
+- `site.*` rows hold the site's title, base URL, and each `params` value.
 - `data.*` rows hold one row for each data file, and for each [data script](@/guide/data.md).
 - `collections.*` rows list each [collection](@/guide/collections.md) with its page count.
 - Rows with no prefix are variables from the page's [sidecar script](@/guide/sidecars.md), such as `cheapest`.
@@ -134,7 +148,7 @@ That is how you find a misspelled field: `{{ page.titel }}` prints nothing, and 
 A value that comes from the wrong place shows in the source column.
 If a page's `description` is the folder's, the source says `_dir.toml`, and the page needs its own `description`.
 
-Reuben builds the page to explain it, so errors in the page, its sidecar script, its `_dir.toml` files, the includes and the data appear too.
+Reuben builds the page to explain it, so errors in the page, its sidecar script, its `_dir.toml` files, the includes, and the data appear too.
 When the page can't build, `reuben explain` prints the names it found, then the errors, and exits with status 1.
 This is a page whose sidecar reads past the end of a list:
 

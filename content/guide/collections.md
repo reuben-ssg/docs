@@ -6,7 +6,7 @@ description: Turn a top-level folder of pages into a sorted list and a tree that
 
 A collection is a top-level folder of `content/` that holds at least one page.
 Reuben gives every collection to every page and layout as `collections.<name>`, with its pages in order and its folder structure as a tree.
-Use a collection to build a blog index, a list of recent posts or a sidebar.
+Use a collection to build a blog index, a list of recent posts, or a sidebar.
 
 [Configuration](@/configuration.md#collections) lists the settings a collection takes.
 This page shows how to use the collection from a page.
@@ -32,9 +32,11 @@ It also gives every page in the folder the `post` [layout](@/guide/layouts.md).
 
 ## Read a collection
 
-Take this site, which has four pages in `content/posts/`:
+Take this site, which has four pages in `content/posts/` and the `post` layout:
 
 ```text
+layouts/
+└── post.html
 content/
 ├── index.md
 └── posts/
@@ -43,6 +45,26 @@ content/
     ├── first.md
     ├── index.md
     └── second.md
+```
+
+The layout, `layouts/post.html`, wraps each page in a minimal HTML page:
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{ page.title }}</title>
+</head>
+<body>
+<main>
+<article>
+<h1>{{ page.title }}</h1>
+{{ content }}
+</article>
+</main>
+</body>
+</html>
 ```
 
 The three posts have a `title` and a `date`.
@@ -101,7 +123,7 @@ A collection also has three methods, and each gives a list:
 
 - `.sort_by("field")` gives the pages sorted by a field.
   Put `-` before the name to reverse the order.
-- `.filter(|p| test)` gives the pages for which the test is `true`.
+- `.filter(|p| test)`, which takes a [Rhai closure](https://rhai.rs/book/), gives the pages for which the test is `true`.
   The test must return `true` or `false`.
 - `.map(|p| value)` gives one value for each page, such as `p.title`.
 
@@ -130,6 +152,7 @@ Pages that aren't Markdown, such as `.html` templates, join a collection too, bu
 
 The `sort` setting names a page field.
 Reuben orders the pages by that field, and by path when two pages tie.
+Without a `sort` setting, a collection is ordered by path.
 These rules apply to `sort` and to `.sort_by()`:
 
 - Numbers sort before text, and text sorts before missing values, whichever direction you sort in.
@@ -147,7 +170,7 @@ sort = "weight"
 ## Use the tree
 
 `collections.blog.tree` is the folder structure, starting at the collection's own folder.
-Each node is a map with a `title`, a `url`, a `path`, `is_dir` and a list of `children`.
+Each node is a map with a `title`, a `url`, a `path`, `is_dir`, and a list of `children`.
 The tree is sorted by the same `sort` setting as the collection.
 
 A folder that has an `index.md` takes its title and URL from that page.
@@ -181,7 +204,7 @@ A page outputs its result with `raw()`:
 <ul><li>Second post</li><li>First post</li><li>archive<ul><li>Old post</li></ul></li></ul>
 ```
 
-The sidebar on this page is built from a tree like this one.
+A theme can build a sidebar from the tree with an include like this one; this site's theme does.
 
 ## Errors
 
