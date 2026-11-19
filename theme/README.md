@@ -26,6 +26,7 @@ Extract when the Tokyo Night theme (`reuben-ssg/theme-nvim`) exists, so there ar
 
 Fonts are self-hosted from `static/fonts/` and each carries its OFL licence file.
 No page requests a third-party font or stylesheet.
+Theme assets use root-relative paths so previews stay self-contained.
 
 ## Licence
 
