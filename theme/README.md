@@ -32,13 +32,17 @@ Extract when the Tokyo Night theme (`reuben-ssg/theme-nvim`) exists, so there ar
 - A collection's index page can set `nav_title` to shorten its header link; a root-level page's link is its slug with a capital first letter.
 - `data/release.toml` `version` fills the "Now serving" ticket.
 - Includes for content: `logo()` and `sandwich()`.
+- `logo()` uses the id prefix `logo` and the header brand uses `brand`, so call `logo()` once per page; `logo_svg(prefix)` takes a prefix of your own for more.
 - Classes for content: `hero`, `hero-art`, `btn-row`, `btn`, `btn-alt`, `cards`, `card`, `order-label`, `install`, `ticket`.
 
-The favicons draw Pacifico's R as an outline path, since an SVG favicon can't load a web font.
+The logo and favicons draw Pacifico's letters as outline paths, since an SVG used as an image can't load a web font.
+The favicon links are `favicon.svg`, a 32 px PNG and a 180 px `apple-touch-icon.png`.
 
 ## Fonts
 
-Fonts are self-hosted from `static/fonts/` and each carries its OFL licence file.
+Fonts are self-hosted from `static/fonts/` as Latin-subset WOFF2 files, and each family carries its OFL licence file.
+Nunito keeps its full `wght` axis; DM Mono ships as 400 and 500.
+`Pacifico-OFL.txt` stays because the logo and favicon paths are derived glyph outlines, but the Pacifico font file itself is not shipped.
 No page requests a third-party font or stylesheet.
 Theme assets use root-relative paths so previews stay self-contained.
 

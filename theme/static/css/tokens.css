@@ -14,12 +14,11 @@
 
   --font-body: "Nunito", system-ui, sans-serif;
   --font-mono: "DM Mono", ui-monospace, monospace;
-  --font-logo: "Pacifico", cursive;
 }
 
 @font-face {
   font-family: "Nunito";
-  src: url("../fonts/Nunito-Variable.ttf") format("truetype");
+  src: url("../fonts/nunito-latin.woff2") format("woff2");
   font-weight: 200 1000;
   font-style: normal;
   font-display: swap;
@@ -27,7 +26,7 @@
 
 @font-face {
   font-family: "DM Mono";
-  src: url("../fonts/DMMono-Regular.ttf") format("truetype");
+  src: url("../fonts/dm-mono-400-latin.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -35,16 +34,8 @@
 
 @font-face {
   font-family: "DM Mono";
-  src: url("../fonts/DMMono-Medium.ttf") format("truetype");
+  src: url("../fonts/dm-mono-500-latin.woff2") format("woff2");
   font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Pacifico";
-  src: url("../fonts/Pacifico-Regular.ttf") format("truetype");
-  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
