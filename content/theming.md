@@ -94,6 +94,7 @@ A layout can read these names:
 | `collections` | Every collection, by name.                                                         |
 
 A layout can also call any include function and any built-in helper, and it sees the variables a page's sidecar script sets.
+A sidecar script is a `.rhai` file next to a page, with the same name, that runs before the page's blocks and whose top-level variables the page can use.
 
 The output of a `{{ }}` block is escaped as HTML, so `{{ page.title }}` is safe to use in text and attributes.
 `content` is already HTML, so Reuben doesn't escape it.
@@ -175,10 +176,11 @@ Each kind of file has its own rule.
 | Kind     | Rule                                                                                                                      |
 | -------- | ------------------------------------------------------------------------------------------------------------------------- |
 | Layouts  | Reuben looks in the site's `layouts/` first and uses the theme's layout only when the site has none of that name.         |
-| Includes | Reuben loads the theme's includes first and the site's after. A site function replaces a theme function of the same name.  |
+| Includes | Reuben loads the theme's includes first and the site's after. A site function replaces a theme function with the same name and the same number of parameters. |
 | Static   | A file in the site's `static/` replaces a theme file at the same path.                                                    |
 
-To override one include, define the same function in the site's `includes/` folder.
+To override one include, define a function with the same name and the same number of parameters in the site's `includes/` folder.
+A site file with the same name as a theme file doesn't replace the theme file as a whole, and the theme file's other functions stay available.
 This `includes/footer.rhai` replaces the theme's `footer()`:
 
 ```rhai
@@ -189,6 +191,7 @@ fn footer() {
 
 To override a stylesheet, put a file at the same path in the site's `static/` folder.
 A theme stylesheet that uses `@import` also looks in your site's `static/` folder first, so you can replace a partial without touching the rest.
+A partial is a CSS file whose name starts with `_`, such as `_colors.css`, that other CSS files import and that Reuben never writes to the output.
 
 To use a different layout for one page, add a layout to the site's `layouts/` folder and name it in the page's front matter.
 With `layouts/wide.html` in the site, this page uses it instead of the theme's `default.html`:
@@ -222,4 +225,4 @@ It adds the page's title as an `h1` unless the body already has its own.
 
 Reuben 0.1.1 has no theme manifest.
 It never reads a `theme.toml` file, so a `theme.toml` in a theme folder has no effect.
-A theme's name, version and licence belong in the theme's own README.
+A theme's name, version and license belong in the theme's own README.

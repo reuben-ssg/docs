@@ -15,8 +15,8 @@ It looks for these files and folders in the site root.
 | Path           | What it holds                                                                                     |
 | -------------- | ------------------------------------------------------------------------------------------------- |
 | `reuben.toml`  | The site configuration. It is optional.                                                           |
-| `content/`     | The pages, as Markdown files. Reuben copies any other file in it to the output beside its pages. |
-| `static/`      | Files Reuben copies to the root of the output, such as images and stylesheets.                    |
+| `content/`     | The pages, as Markdown files. Reuben copies other files in it to the output beside their pages, except `.rhai` sidecar scripts, which it never publishes, and files that start with front matter, which it renders as templates. |
+| `static/`      | Files Reuben copies to the root of the output, such as images and stylesheets. Files that start with front matter are rendered as templates, and CSS files named `_name.css` are import-only partials that Reuben never writes out. |
 | `data/`        | Data files (`.json`, `.toml`, `.yaml`, `.yml` and `.rhai`) that become the `data` value in pages. |
 | `includes/`    | Rhai files (`.rhai`) whose functions pages and layouts can call.                                  |
 | `layouts/`     | HTML layouts that wrap pages.                                                                     |
@@ -103,7 +103,7 @@ sort = "weight"
 | `layout` | The layout for every page in the collection that doesn't set its own `layout`.                         |
 | `sort`   | The page field that orders the collection. Put `-` before the name for descending order.               |
 
-Pages that tie on the `sort` field, and every page when `sort` is empty, are ordered by their path.
+Pages that tie on the `sort` field, and every page when `sort` isn't set, are ordered by their path.
 A page without the field comes after the pages that have it.
 
 If two collections end up with the same name, Reuben reports this error:
@@ -466,7 +466,7 @@ reuben explain [OPTIONS] <PAGE>
 | `--root <ROOT>` | The site root. Default `.`.                                  |
 | `--env <ENV>`   | Merges `reuben.<name>.toml` over `reuben.toml` if it exists. |
 
-The list covers the page's front matter and computed names, `site`, `data`, `collections`, the variables a sidecar script sets, the functions your includes define, and the built-in helpers.
+The list covers the page's front matter and computed names, `site`, `data`, `collections`, the variables a sidecar script sets (a `.rhai` file next to the page, with the same name, that runs before the page's blocks), the functions your includes define, and the built-in helpers.
 It also finds draft pages.
 Here is the output for the `guide/intro.md` page described above, in a site whose `reuben.toml` is:
 
