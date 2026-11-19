@@ -499,6 +499,28 @@ pre code {
   font-weight: 800;
 }
 
+/* Pitch and order side by side; the order block drops below when the row runs out of room. */
+.hero-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 2.5rem;
+}
+
+.hero-pitch {
+  flex: 1 1 20rem;
+  min-width: 0;
+}
+
+.hero-order {
+  flex: 0 1 auto;
+  max-width: 100%;
+}
+
+.hero-order .order-label {
+  margin-top: 0;
+}
+
 .install {
   display: inline-block;
   max-width: 100%;
@@ -510,7 +532,19 @@ pre code {
   font-size: 0.9375rem;
   border-radius: 10px;
   box-shadow: 4px 4px 0 var(--magenta);
-  overflow-wrap: anywhere;
+  /* One line always; on narrow screens the box scrolls instead of wrapping. */
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+/* Narrow phones: shrink the text so the whole command still fits on one line.
+   DM Mono is 0.6em per character, so 41 characters at 3.3vw plus 16px of
+   padding fit inside a 320px screen's content column. */
+@media (max-width: 480px) {
+  .install {
+    padding: 8px;
+    font-size: clamp(0.625rem, 3.3vw, 0.9375rem);
+  }
 }
 
 .install code {
@@ -548,6 +582,11 @@ pre code {
 
 .hero p {
   max-width: 36ch;
+}
+
+/* The install command is code, not prose: it gets the full width and one line. */
+.hero .install {
+  max-width: 100%;
 }
 
 /* ---------- Logo ---------- */
