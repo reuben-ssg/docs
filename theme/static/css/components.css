@@ -795,6 +795,18 @@ a:focus-visible > .logo .shines {
   border-radius: 8px;
 }
 
+/* ---------- Edit link ---------- */
+
+.edit-page {
+  margin: 2.5rem 0 0;
+  font-size: 0.9375rem;
+}
+
+.edit-page a {
+  display: inline-block;
+  min-height: 1.5rem;
+}
+
 /* ---------- Footer ---------- */
 
 .site-footer {

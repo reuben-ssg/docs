@@ -30,7 +30,7 @@ Extract when the Tokyo Night theme (`reuben-ssg/theme-nvim`) exists, so there ar
 - A page inside a top-level `content/` folder also gets a breadcrumb.
 - A page with three or more `h2`s gets an "on this page" list.
 - The layout adds the page title as the `h1` unless the body has its own.
-- `[params]` keys the theme reads: `nav_order` (collection or root-level page slugs, in order), `repo_url` and `license` (footer).
+- `[params]` keys the theme reads: `nav_order` (collection or root-level page slugs, in order), `repo_url` and `license` (footer), and `edit_url` (an "Edit this page on GitHub" link: the URL up to and including the content folder, to which the theme appends each page's path; no link when it's unset).
 - A collection's index page can set `nav_title` to shorten its sidebar heading; a root-level page's link is its slug with a capital first letter.
 - `data/release.toml` `version` fills the "Now serving" ticket.
 - Includes for content: `logo()` and `sandwich()`.

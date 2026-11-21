@@ -166,3 +166,11 @@ fn footer(site) {
     }
     raw(html + `</p></footer>`)
 }
+
+// A link to edit the page's source, when `params.edit_url` is set: that URL plus the page's path under `content/`.
+fn edit_link(page, site) {
+    if !("edit_url" in site.params) || page.path == "" {
+        return ();
+    }
+    raw(`<p class="edit-page"><a href="${escape(site.params.edit_url + page.path)}">Edit this page on GitHub</a></p>`)
+}

@@ -8,6 +8,7 @@ sitemap = true
 # Drafts and pages that don't exist yet are left out of the navigation.
 nav_order = ["why", "quickstart", "guide", "configuration", "theming", "add-ons", "contributing"]
 repo_url = "https://github.com/reuben-ssg/reuben"
+edit_url = "https://github.com/reuben-ssg/docs/edit/main/content/"
 license = "MIT OR Apache-2.0"
 
 # The guide's pages set `weight`, which orders the sidebar.
