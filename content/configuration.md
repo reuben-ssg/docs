@@ -135,7 +135,7 @@ warning: sitemap.xml skipped: base_url must be absolute (http:// or https://)
 A page or static file named `sitemap.xml` replaces the generated one.
 
 Each URL in the sitemap gets a `<lastmod>` date.
-The date is the day of the last commit that touched the page's source file.
+The date is the day, in UTC, of the last commit that touched the page's source file.
 Without git, or for a file git has no commit for, it is the file's modification time.
 A page you edited but haven't committed keeps the date of its last commit, because Reuben reads only git's history and index, never your working files through git.
 In a shallow clone, such as many CI jobs make by default, every page gets the date of the one commit that was fetched.
@@ -156,7 +156,7 @@ highlight = true
 | -------------------- | ------------- | ------- | -------------------------------------------------------------------------------- |
 | `highlight`          | true or false | `false` | Highlights fenced code blocks in a known language.                               |
 | `math`               | true or false | `false` | Reads `$…$` and `$$…$$` as math and renders it as MathML.                        |
-| `footnote_backlinks` | true or false | `true`  | Adds a link from each footnote back to where the page cites it.                  |
+| `footnote_backlinks` | true or false | `true`  | Links each footnote back to where the page cites it; an accessibility feature.   |
 
 With `highlight` on, tokens in a fenced code block get `hl-` classes, and [`reuben css highlight`](@/configuration.md#reuben-css-highlight) prints the CSS for them.
 With it off, a fenced block is written as `<pre><code class="language-x">`, where `x` is the language, with the code escaped.
