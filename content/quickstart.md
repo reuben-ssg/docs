@@ -63,7 +63,7 @@ Print the version to confirm the command runs:
 npx reuben --version
 ```
 
-It prints `reuben` and the version number, such as `reuben 0.1.1`.
+It prints `reuben` and the version number, such as `reuben 0.2.0`.
 
 ## Create the site
 
@@ -136,15 +136,14 @@ npx reuben build
 Reuben prints a summary:
 
 ```text
-Built 2 pages, copied 0 static files in 1ms
-warning: sitemap.xml skipped: base_url must be absolute (http:// or https://)
+Built 2 pages, copied 0 static files in 23ms
 ```
 
 The time differs on your machine.
 
-The warning is about the sitemap.
-Reuben writes `sitemap.xml` only when `base_url` is an absolute URL.
-Add a line such as `base_url = "https://example.com/"` to `reuben.toml` once you know where the site will live, and the warning goes away.
+Reuben writes no `sitemap.xml` unless you ask for one.
+When you know where the site will live, add `base_url = "https://example.com/"` and `sitemap = true` to `reuben.toml`.
+The [sitemap](@/configuration.md#sitemap) section of the configuration reference has the details.
 
 `dist/` now holds the built pages:
 
@@ -223,9 +222,9 @@ In `content/index.md`, change `@/about.md` to `@/abuot.md`, and run the check ag
 
 ```text
 error: no page `abuot.md`; did you mean `about.md`?
-  --> content/index.md:7:6
+  --> content/index.md:8:6
   |
-7 | Read [about this site](@/abuot.md).
+8 | Read [about this site](@/abuot.md).
   |      ^
 Found 1 error in 1 file
 ```

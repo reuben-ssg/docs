@@ -9,7 +9,7 @@
     "dev": "reuben serve"
   },
   "devDependencies": {
-    "@reuben-ssg/reuben": "0.1.1",
+    "@reuben-ssg/reuben": "0.2.0",
     "wrangler": "4.65.0"
   }
 }

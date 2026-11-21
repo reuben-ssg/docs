@@ -5,7 +5,7 @@ description: How Reuben themes work, what a theme folder holds, and how a site o
 
 A theme is a folder of layouts, includes, and static files that gives a site its look.
 This page explains what goes in a theme folder, how Reuben combines a theme with your site, and how your site overrides it.
-It covers Reuben 0.1.1.
+It covers Reuben 0.2.0.
 You need a site that builds, so start with the [Quickstart](@/quickstart.md) if you don't have one.
 
 ## What a theme holds
@@ -131,9 +131,10 @@ body{font-family:sans-serif}
 
 [Configuration](@/configuration.md#css) lists the settings.
 
-For highlighted code, fenced code blocks in a known language build with `hl-` classes on their tokens.
+For highlighted code, set `highlight = true` in the `[markdown]` table of `reuben.toml`.
+Then fenced code blocks in a known language build with `hl-` classes on their tokens.
 Run `reuben css highlight` and save the output in your theme's `static/` folder to style those classes.
-[Configuration](@/configuration.md#reuben-css-highlight) lists the built-in color themes.
+[Configuration](@/configuration.md#markdown) describes the setting, and [`reuben css highlight`](@/configuration.md#reuben-css-highlight) lists the built-in color themes.
 
 ## Build with the theme
 
@@ -223,6 +224,6 @@ It adds the page's title as an `h1` unless the body already has its own.
 
 ## What Reuben doesn't read
 
-Reuben 0.1.1 has no theme manifest.
+Reuben 0.2.0 has no theme manifest.
 It never reads a `theme.toml` file, so a `theme.toml` in a theme folder has no effect.
 A theme's name, version, and license belong in the theme's own README.

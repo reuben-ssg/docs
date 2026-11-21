@@ -1,10 +1,10 @@
 ---
 title: Configuration
-description: Every reuben.toml key, front matter field, _dir.toml default and command-line flag in Reuben 0.1.1.
+description: Every reuben.toml key, front matter field, _dir.toml default and command-line flag in Reuben 0.2.0.
 ---
 
 This page is the reference for what you can set in a Reuben site and how you run Reuben.
-It covers Reuben 0.1.1.
+It covers Reuben 0.2.0.
 To build your first site, start with the [Quickstart](@/quickstart.md).
 
 ## Site folders
@@ -34,7 +34,8 @@ A site without one builds with the defaults in the table below.
 Reuben treats an unknown key as an error and names it, so a typo can't pass silently:
 
 ```text
-error: reuben.toml: config: unknown field `titel`, expected one of `title`, `base_url`, `theme`, `params`, `collections`, `sitemap`, `css`, `a11y`
+error: reuben.toml: config: unknown field `titel`, expected one of `title`, `base_url`, `theme`, `params`, `collections`, `sitemap`, `css`, `markdown`, `a11y`
+Found 1 error in 1 file
 ```
 
 | Key           | Type             | Default      | What it does                                                         |
@@ -44,8 +45,9 @@ error: reuben.toml: config: unknown field `titel`, expected one of `title`, `bas
 | `theme`       | path             | none         | A folder of layouts, includes, and static files.                      |
 | `params`      | table            | empty        | Your own values, available to scripts as `site.params`.              |
 | `collections` | table of tables  | none         | Settings for the top-level folders of `content/`.                    |
-| `sitemap`     | true or false    | `true`       | Whether Reuben writes `sitemap.xml`.                                 |
+| `sitemap`     | true or false    | `false`      | Whether Reuben writes `sitemap.xml`.                                 |
 | `css`         | table            | see below    | How Reuben processes CSS files.                                      |
+| `markdown`    | table            | see below    | Which optional Markdown features Reuben turns on.                    |
 | `a11y`        | table            | see below    | Which accessibility rules to switch off.                             |
 | `include`     | list of globs    | none         | More TOML files to merge into the configuration.                     |
 
@@ -116,8 +118,13 @@ two collections are named "docs"; rename one under [collections.<folder>]
 
 ### sitemap
 
-Reuben writes `sitemap.xml` to the output when `sitemap` is true, which is the default.
-It lists every HTML page except `404.html`.
+Reuben writes no `sitemap.xml` unless you set `sitemap = true`:
+
+```toml
+sitemap = true
+```
+
+The file lists every HTML page except `404.html`.
 It needs an absolute `base_url`, one that starts with `http://` or `https://`.
 Otherwise, Reuben skips the file and prints a warning:
 
@@ -126,7 +133,40 @@ warning: sitemap.xml skipped: base_url must be absolute (http:// or https://)
 ```
 
 A page or static file named `sitemap.xml` replaces the generated one.
-Set `sitemap = false` to switch the file off.
+
+Each URL in the sitemap gets a `<lastmod>` date.
+The date is the day of the last commit that touched the page's source file.
+Without git, or for a file git has no commit for, it is the file's modification time.
+A page you edited but haven't committed keeps the date of its last commit, because Reuben reads only git's history and index, never your working files through git.
+In a shallow clone, such as many CI jobs make by default, every page gets the date of the one commit that was fetched.
+Fetch the full history if the dates matter.
+
+### markdown
+
+The `[markdown]` table turns optional Markdown features on and off.
+Reuben adds nothing to the HTML of your Markdown unless you ask for it, so highlighting and math are off by default.
+An unknown key in the table is a config error.
+
+```toml
+[markdown]
+highlight = true
+```
+
+| Key                  | Type          | Default | What it does                                                                     |
+| -------------------- | ------------- | ------- | -------------------------------------------------------------------------------- |
+| `highlight`          | true or false | `false` | Highlights fenced code blocks in a known language.                               |
+| `math`               | true or false | `false` | Reads `$…$` and `$$…$$` as math and renders it as MathML.                        |
+| `footnote_backlinks` | true or false | `true`  | Adds a link from each footnote back to where the page cites it.                  |
+
+With `highlight` on, tokens in a fenced code block get `hl-` classes, and [`reuben css highlight`](@/configuration.md#reuben-css-highlight) prints the CSS for them.
+With it off, a fenced block is written as `<pre><code class="language-x">`, where `x` is the language, with the code escaped.
+
+With `math` off, a `$` is plain text.
+A `{{ … }}` inside `$…$` then runs as a block like any other, so `$x^{{2}}$` prints `$x^2$`, and `{{n}}` fails if `n` is undefined.
+Turn `math` on to keep the braces literal.
+
+Setting `footnote_backlinks = false` turns off an accessibility feature.
+It removes the links from each footnote back to where the page cited it, which screen-reader and keyboard users rely on.
 
 ### css
 
@@ -521,7 +561,7 @@ no page matches `nope.md`: give a path like content/blog/x.md, a path under cont
 reuben css highlight [--theme <THEME>]
 ```
 
-Fenced code blocks in a known language build with `hl-` classes on their tokens.
+Fenced code blocks in a known language build with `hl-` classes on their tokens, but only when `[markdown] highlight = true` is set.
 `reuben css highlight` prints the CSS for those classes.
 `--theme` takes a built-in theme name or the path to a `.tmTheme` file, and defaults to `base16-ocean.dark`.
 The built-in themes are `InspiredGitHub`, `Solarized (dark)`, `Solarized (light)`, `base16-eighties.dark`, `base16-mocha.dark`, `base16-ocean.dark`, and `base16-ocean.light`.

@@ -123,8 +123,11 @@ A block can also use the variables the page's [sidecar script](@/guide/sidecars.
 ## Show a block without running it
 
 Reuben doesn't run blocks inside code.
-A fenced code block, an indented code block, inline code, and math all stay as you wrote them.
+A fenced code block, an indented code block, and inline code all stay as you wrote them.
 That is how this page shows `{{ page.title }}` without printing a title.
+
+Math stays as you wrote it only when you set `math = true` in the `[markdown]` table of `reuben.toml`.
+With math off, which is the default, `$…$` is ordinary text, so a block inside it runs.
 
 Everywhere else, including raw HTML in the page, Reuben runs the block.
 To show a literal `{{` in running text, output it from a block:
