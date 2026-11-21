@@ -3,9 +3,9 @@ base_url = "https://reuben-ssg.dev/"
 theme = "theme"
 
 [params]
-# Header navigation, in order: a top-level folder (collection) or a root-level page, by slug.
+# Sidebar navigation, in order: a top-level folder (collection) or a root-level page, by slug.
 # Drafts and pages that don't exist yet are left out of the navigation.
-nav_order = ["quickstart", "guide", "configuration", "theming", "add-ons", "contributing"]
+nav_order = ["why", "quickstart", "guide", "configuration", "theming", "add-ons", "contributing"]
 repo_url = "https://github.com/reuben-ssg/reuben"
 license = "MIT OR Apache-2.0"
 
