@@ -5,11 +5,14 @@
 </head>
 <body class="home">
 {{ skip_link() }}
-{{ header(page, site, data, collections) }}
-<main id="main" class="page" tabindex="-1">
+{{ header(page, data) }}
+<div class="page has-sidebar">
+{{ site_nav(page, site, collections) }}
+<main id="main" tabindex="-1">
 {{ title_heading(page, content) }}
 {{ content }}
 </main>
+</div>
 {{ footer(site) }}
 </body>
 </html>

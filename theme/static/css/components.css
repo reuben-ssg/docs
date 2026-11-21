@@ -114,7 +114,7 @@ svg {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem 1.25rem;
-  max-width: 76rem;
+  max-width: 82rem;
   margin: 0 auto;
   padding: 0.5rem 1rem 0;
 }
@@ -145,42 +145,10 @@ svg {
   color: var(--deep-magenta);
 }
 
-.main-nav {
-  margin-left: auto;
-}
-
-.main-nav ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 1.1rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.main-nav a {
-  display: inline-block;
-  min-height: 2rem;
-  padding: 0.25rem 0;
-  color: var(--pumpernickel);
-  font-weight: 800;
-  text-decoration: none;
-  border-bottom: 3px solid transparent;
-}
-
-.main-nav a:hover,
-.main-nav a[aria-current] {
-  border-bottom-color: var(--deep-magenta);
-}
-
-.main-nav a[aria-current="page"] {
-  font-weight: 900;
-}
-
 /* ---------- Page layout ---------- */
 
 .page {
-  max-width: 76rem;
+  max-width: 82rem;
   margin: 0 auto;
   padding: 0 1rem 3rem;
 }
@@ -190,9 +158,10 @@ svg {
   gap: 1rem 2.5rem;
 }
 
-@media (min-width: 52rem) {
+/* Sidebar beside the content from 64rem, which leaves the content column about 46rem. */
+@media (min-width: 64rem) {
   .has-sidebar {
-    grid-template-columns: 14rem minmax(0, 1fr);
+    grid-template-columns: 13rem minmax(0, 1fr);
     align-items: start;
   }
 }
@@ -210,10 +179,11 @@ main {
   margin-top: 0;
 }
 
-@media (min-width: 72rem) {
+/* "On this page" becomes a third column once the content column still gets about 43rem beside it. */
+@media (min-width: 80rem) {
   .page-body:has(> .toc) {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 14rem;
+    grid-template-columns: minmax(0, 1fr) 13rem;
     gap: 2.5rem;
     align-items: start;
   }
@@ -228,36 +198,34 @@ main {
   }
 }
 
-/* ---------- Sidebar, breadcrumb, on this page ---------- */
+/* ---------- Site sidebar, breadcrumb, on this page ---------- */
 
-.sidebar,
+.site-nav,
 .toc {
   background: var(--white);
   border: 3px solid var(--pumpernickel);
   border-radius: 14px;
   box-shadow: 5px 5px 0 var(--pumpernickel);
-  padding: 0.75rem 1rem;
   font-size: 0.9375rem;
 }
 
-.sidebar-title,
+.toc {
+  padding: 0.75rem 1rem;
+}
+
 .toc-title {
   margin: 0 0 0.4rem;
   font-weight: 900;
 }
 
-.sidebar ul,
+.site-nav ul,
 .toc ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.sidebar ul ul {
-  padding-left: 0.9rem;
-}
-
-.sidebar a,
+.site-nav a,
 .toc a {
   display: block;
   min-height: 1.5rem;
@@ -269,15 +237,116 @@ main {
   overflow-wrap: anywhere;
 }
 
-.sidebar-title a {
+/* Narrow screens: a collapsed "Pages" disclosure above the content. */
+.site-nav summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.4rem 1rem;
+  border-radius: 11px;
+  font-weight: 900;
+  cursor: pointer;
+  list-style: none;
+}
+
+.site-nav summary::-webkit-details-marker {
+  display: none;
+}
+
+/* A chevron drawn with borders, pointing down when closed and up when open. */
+.site-nav summary::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-top: -0.2rem;
+  border-right: 3px solid currentcolor;
+  border-bottom: 3px solid currentcolor;
+  transform: rotate(45deg);
+  transition: transform 0.15s ease;
+}
+
+.site-nav details[open] > summary::before {
+  margin-top: 0.2rem;
+  transform: rotate(-135deg);
+}
+
+.site-nav .site-nav-list {
+  padding: 0.25rem 1rem 0.75rem;
+}
+
+.site-nav details[open] > .site-nav-list {
+  border-top: 2px dashed var(--pumpernickel);
+  padding-top: 0.6rem;
+}
+
+.site-nav-list > li + li {
+  margin-top: 0.15rem;
+}
+
+.site-nav-heading {
+  display: block;
+  margin-top: 0.4rem;
+  font-weight: 900;
+}
+
+.site-nav a.site-nav-heading {
   color: var(--pumpernickel);
 }
 
-.sidebar a[aria-current="page"] {
+.site-nav-section ul {
+  padding-left: 0.9rem;
+}
+
+/* The section holding the current page. */
+.site-nav-section.is-current {
+  margin: 0.3rem -0.5rem;
+  padding: 0 0.5rem 0.35rem;
+  background: var(--swiss);
+  border: 2px solid var(--pumpernickel);
+  border-radius: 8px;
+}
+
+.site-nav a[aria-current="page"] {
   border-left-color: var(--magenta);
   color: var(--pumpernickel);
   font-weight: 900;
   text-decoration: none;
+}
+
+/* The ring sits inside the link so the scrolling sidebar never clips it. */
+.site-nav a:focus-visible,
+.site-nav summary:focus-visible {
+  outline-offset: -3px;
+}
+
+/* Wide screens: the same list as a sticky sidebar that scrolls on its own. Where `::details-content` isn't
+   supported, the summary stays and the sidebar is a disclosure there too. */
+@media (min-width: 64rem) {
+  .site-nav {
+    position: sticky;
+    top: 1rem;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  @supports selector(::details-content) {
+    .site-nav summary {
+      display: none;
+    }
+
+    .site-nav details::details-content {
+      display: block;
+      content-visibility: visible;
+    }
+
+    .site-nav .site-nav-list,
+    .site-nav details[open] > .site-nav-list {
+      padding-top: 0.6rem;
+      border-top: 0;
+    }
+  }
 }
 
 .toc .toc-l3 a {
@@ -729,7 +798,7 @@ a:focus-visible > .logo .shines {
 /* ---------- Footer ---------- */
 
 .site-footer {
-  max-width: 76rem;
+  max-width: 82rem;
   margin: 0 auto;
   padding: 1.25rem 1rem 2rem;
   border-top: 3px dashed var(--pumpernickel);

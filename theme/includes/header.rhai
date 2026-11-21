@@ -1,4 +1,4 @@
-// The skip link, the awning and the masthead: brand, "Now serving" ticket and the main navigation.
+// The skip link, the awning and the masthead: brand and "Now serving" ticket.
 
 fn skip_link() {
     raw(`<a class="skip-link" href="#main">Skip to content</a>`)
@@ -37,26 +37,9 @@ fn ticket(data) {
     raw(`<p class="ticket">Now serving: <b>v${version}</b></p>`)
 }
 
-fn main_nav(page, site, collections) {
-    let items = nav_items(site, collections);
-    if items.len() == 0 {
-        return "";
-    }
-    let html = `<nav class="main-nav" aria-label="Main"><ul>`;
-    for item in items {
-        let current = "";
-        if item.url == page.url {
-            current = ` aria-current="page"`;
-        } else if item.section && page.collection == item.slug {
-            current = ` aria-current="true"`;
-        }
-        html += `<li><a href="${escape(item.url)}"${current}>${escape(item.title)}</a></li>`;
-    }
-    html + `</ul></nav>`
-}
-
-// The home page carries the big logo in its hero, so only other pages get the small brand link.
-fn header(page, site, data, collections) {
+// The home page carries the big logo in its hero, so only other pages get the small brand link. Navigation lives in
+// the site sidebar (`site_nav`), not here.
+fn header(page, data) {
     let brand = "";
     if page.url != "/" {
         brand = `<a class="brand" href="/">${logo_svg("brand").to_string()}</a>`;
@@ -70,7 +53,6 @@ fn header(page, site, data, collections) {
 ${awning().to_string()}
 <div class="masthead">
 ${brand}${ticket_html}
-${main_nav(page, site, collections)}
 </div>
 </header>`)
 }

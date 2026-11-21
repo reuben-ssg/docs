@@ -5,9 +5,9 @@
 </head>
 <body>
 {{ skip_link() }}
-{{ header(page, site, data, collections) }}
-<div class="{{ if page.collection == "" { "page" } else { "page has-sidebar" } }}">
-{{ sidebar(page, collections) }}
+{{ header(page, data) }}
+<div class="page has-sidebar">
+{{ site_nav(page, site, collections) }}
 <main id="main" tabindex="-1">
 {{ breadcrumb(page, collections) }}
 {{ title_heading(page, content) }}

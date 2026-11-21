@@ -24,12 +24,14 @@ Extract when the Tokyo Night theme (`reuben-ssg/theme-nvim`) exists, so there ar
 
 ## Using the theme
 
-- `layout: home` gives a page the header and footer with no sidebar; every other page uses `default`.
-- A page inside a top-level `content/` folder gets that collection's tree as a sidebar and a breadcrumb.
+- Every page gets the site sidebar: each `nav_order` entry in order, with a collection's pages nested under it.
+  It is sticky on wide screens and a collapsed "Pages" menu above the content on narrow ones.
+- `layout: home` gives a page the header, sidebar and footer around its own content; every other page uses `default`.
+- A page inside a top-level `content/` folder also gets a breadcrumb.
 - A page with three or more `h2`s gets an "on this page" list.
 - The layout adds the page title as the `h1` unless the body has its own.
 - `[params]` keys the theme reads: `nav_order` (collection or root-level page slugs, in order), `repo_url` and `license` (footer).
-- A collection's index page can set `nav_title` to shorten its header link; a root-level page's link is its slug with a capital first letter.
+- A collection's index page can set `nav_title` to shorten its sidebar heading; a root-level page's link is its slug with a capital first letter.
 - `data/release.toml` `version` fills the "Now serving" ticket.
 - Includes for content: `logo()` and `sandwich()`.
 - `logo()` uses the id prefix `logo` and the header brand uses `brand`, so call `logo()` once per page; `logo_svg(prefix)` takes a prefix of your own for more.

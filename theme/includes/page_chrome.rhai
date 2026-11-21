@@ -1,4 +1,4 @@
-// The document head, page title, section sidebar, breadcrumb, "on this page" list and footer.
+// The document head, page title, site sidebar, breadcrumb, "on this page" list and footer.
 
 fn head(page, site) {
     let title = escape(site.title);
@@ -51,25 +51,48 @@ fn tree_list(children, current) {
     html + "</ul>"
 }
 
-// Every page in a collection folder gets that collection's tree as its sidebar.
-fn sidebar(page, collections) {
-    let name = page.collection;
-    if name == "" || !(name in collections) {
+// The whole site in `nav_order` order: root-level pages as links, collections as a heading with their tree below.
+// One `<details>` serves both widths: collapsed above the content on narrow screens, and on wide screens the CSS
+// hides the summary and shows the contents as a sticky sidebar.
+fn site_nav(page, site, collections) {
+    let items = nav_items(site, collections);
+    if items.len() == 0 {
         return ();
     }
-    let tree = collections[name].tree;
-    let title = escape(tree.title);
-    let heading = title;
-    if tree.url != "" {
-        let attr = "";
-        if tree.url == page.url {
-            attr = ` aria-current="page"`;
+    let html = `<nav class="site-nav" aria-label="Site">
+<details class="site-nav-menu">
+<summary>Pages</summary>
+<ul class="site-nav-list">`;
+    for item in items {
+        let label = escape(item.title);
+        if !item.section {
+            let attr = "";
+            if item.url == page.url {
+                attr = ` aria-current="page"`;
+            }
+            html += `<li><a href="${escape(item.url)}"${attr}>${label}</a></li>`;
+            continue;
         }
-        heading = `<a href="${escape(tree.url)}"${attr}>${title}</a>`;
+        let tree = collections[item.slug].tree;
+        let inside = page.collection == item.slug;
+        let heading = `<span class="site-nav-heading">${label}</span>`;
+        if tree.url != "" {
+            let attr = "";
+            if tree.url == page.url {
+                attr = ` aria-current="page"`;
+            } else if inside {
+                attr = ` aria-current="true"`;
+            }
+            heading = `<a class="site-nav-heading" href="${escape(tree.url)}"${attr}>${label}</a>`;
+        }
+        let classes = "site-nav-section";
+        if inside {
+            classes += " is-current";
+        }
+        html += `<li class="${classes}">${heading}${tree_list(tree.children, page.url)}</li>`;
     }
-    raw(`<nav class="sidebar" aria-label="${title}">
-<p class="sidebar-title">${heading}</p>
-${tree_list(tree.children, page.url)}
+    raw(html + `</ul>
+</details>
 </nav>`)
 }
 
