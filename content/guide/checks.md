@@ -42,7 +42,7 @@ Some rules have details you can rely on:
 - `form-label` accepts a wrapping `<label>`, a `<label for>` that matches the control's `id`, and a non-blank `aria-label`, `aria-labelledby`, or `title`.
   It skips hidden, submit, reset, button, and image inputs, and disabled inputs.
 - `main-landmark` accepts a `<main>` element or a `role="main"`.
-- `link-target` checks links that point into your site, and it skips external links, `mailto:` links and links that are only a `#fragment`.
+- `link-target` checks links that point into your site, and it skips external links, `mailto:` links, and links that are only a `#fragment`.
 
 ## See the findings
 

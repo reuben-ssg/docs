@@ -26,7 +26,7 @@ Add `--root <ROOT>` to explain a site in another folder, and `--env <name>` to m
 
 ## Read the output
 
-This example site has a `reuben.toml`, a `data/menu.json`, an include, a `_dir.toml` and a sidecar script:
+This example site has a `reuben.toml`, a `data/menu.json`, an include, a `_dir.toml`, and a sidecar script:
 
 ```text
 reuben.toml
