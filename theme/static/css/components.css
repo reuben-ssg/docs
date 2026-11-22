@@ -444,6 +444,12 @@ pre {
   overflow-wrap: anywhere;
 }
 
+.prose td code,
+.prose th code {
+  overflow-wrap: normal;
+  white-space: nowrap;
+}
+
 pre {
   margin: 1.25rem 0;
   padding: 0.9rem 1.1rem;
