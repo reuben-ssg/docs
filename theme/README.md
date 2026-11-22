@@ -42,13 +42,13 @@ The favicon links are `favicon.svg`, a 32 px PNG and a 180 px `apple-touch-icon.
 
 ## Fonts
 
-Fonts are self-hosted from `static/fonts/` as Latin-subset WOFF2 files, and each family carries its OFL licence file.
+Fonts are self-hosted from `static/fonts/` as Latin-subset WOFF2 files, and each family carries its OFL license file.
 Nunito keeps its full `wght` axis; DM Mono ships as 400 and 500.
 `Pacifico-OFL.txt` stays because the logo and favicon paths are derived glyph outlines, but the Pacifico font file itself is not shipped.
 No page requests a third-party font or stylesheet.
 Theme assets use root-relative paths so previews stay self-contained.
 
-## Licence
+## License
 
 Licensed under either of
 

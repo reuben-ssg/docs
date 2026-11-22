@@ -13,7 +13,7 @@ fn head(page, site) {
     raw(`<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${title}</title>
-${description}<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+${description}<link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
 <link rel="icon" href="/img/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <link rel="stylesheet" href="/css/tokens.css">

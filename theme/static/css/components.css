@@ -179,7 +179,7 @@ main {
   margin-top: 0;
 }
 
-/* "On this page" becomes a third column once the content column still gets about 43rem beside it. */
+/* "On this page" becomes a third column once the content column still gets about 47rem beside it. */
 @media (min-width: 80rem) {
   .page-body:has(> .toc) {
     display: grid;
@@ -434,6 +434,7 @@ samp,
 pre {
   font-family: var(--font-mono);
   font-size: 0.9em;
+  font-weight: 500;
 }
 
 :not(pre) > code {
