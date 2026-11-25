@@ -833,25 +833,6 @@ a:focus-visible > .logo .shines {
   min-height: 1.5rem;
 }
 
-/* ---------- Page transitions ---------- */
-
-/* Same-origin navigations cross-fade instead of flashing white. Browsers without
-   cross-document view transitions ignore this and load pages as usual. The header
-   and sidebar are named so they hold still while only the content fades. */
-@media (prefers-reduced-motion: no-preference) {
-  @view-transition {
-    navigation: auto;
-  }
-
-  .site-header {
-    view-transition-name: site-header;
-  }
-
-  .site-nav {
-    view-transition-name: site-nav;
-  }
-}
-
 /* ---------- Reduced motion: everything holds still ---------- */
 
 @media (prefers-reduced-motion: reduce) {
