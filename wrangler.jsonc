@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "docs",
+  "name": "reuben-docs",
   "compatibility_date": "2025-10-03",
   "assets": {
     "directory": "./dist",
