@@ -28,6 +28,8 @@ Nick writes the home page, Why, Add-ons and Contributing.
 The reference pages (Quickstart, the feature guide, Configuration and Theming) are drafted with AI assistance and checked against Reuben's source and output.
 Add-ons and Contributing join the sidebar once their pages exist, because `nav_order` leaves out pages that don't exist yet.
 
+Made with love by [@nickvigilante](https://github.com/nickvigilante).
+
 ## License
 
 Licensed under either of

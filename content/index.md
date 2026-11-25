@@ -37,3 +37,5 @@ Markdown with Rhai scripting stacked inside, every build error served in one run
 <li class="card"><h3>Accessible by default</h3><p>Checks baked into every build.</p></li>
 <li class="card"><h3>Zero JavaScript</h3><p>Unless you add it yourself.</p></li>
 </ul>
+
+<p class="made-by">Made with love by <a href="https://github.com/nickvigilante">@nickvigilante</a>.</p>
