@@ -138,10 +138,11 @@ Run `reuben css highlight` and save the output in your theme's `static/` folder 
 
 ## Build with the theme
 
-Build the site as usual:
+Build the site as usual.
+Installed with npm? [Run these with `npx` in front](@/quickstart.md#install-reuben), as in `npx reuben build`.
 
 ```sh
-npx reuben build
+reuben build
 ```
 
 For the theme above and a `content/index.md` that has the title `Home` and a heading, the built page is:

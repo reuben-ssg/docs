@@ -11,12 +11,13 @@ Use it when a block prints nothing, when a value isn't the one you expected, or 
 ## Run it
 
 Give the command a page.
+Installed with npm? [Run these with `npx` in front](@/quickstart.md#install-reuben), as in `npx reuben explain docs/order.md`.
 You can name the page in three ways, and all three explain the same page:
 
 ```sh
-npx reuben explain content/docs/order.md
-npx reuben explain docs/order.md
-npx reuben explain /docs/order/
+reuben explain content/docs/order.md
+reuben explain docs/order.md
+reuben explain /docs/order/
 ```
 
 The first form is the page's source path, the second is its path under `content/`, and the third is its URL.

@@ -253,10 +253,11 @@ For example, to set the real address only for production builds, put this in `re
 base_url = "https://example.com/"
 ```
 
-Then build with the overlay:
+Then build with the overlay.
+Installed with npm? [Run these with `npx` in front](@/quickstart.md#install-reuben), as in `npx reuben build --env production`.
 
 ```sh
-npx reuben build --env production
+reuben build --env production
 ```
 
 An overlay can't use `include`.

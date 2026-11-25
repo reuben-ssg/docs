@@ -25,8 +25,10 @@ npm init -y
 npm install --save-dev @reuben-ssg/reuben
 ```
 
-The package installs the prebuilt `reuben` command, so you run it with `npx reuben`.
-The rest of this page writes `npx reuben` in front of every command.
+The package installs the prebuilt `reuben` command.
+This page, and the rest of the docs, write each command as plain `reuben`.
+If you installed Reuben with npm, put `npx` in front of each command, such as `npx reuben build`.
+`npm run` scripts work too.
 
 ### With Cargo
 
@@ -37,7 +39,6 @@ cargo install reuben
 ```
 
 With this route, and with the installers below, you run `reuben` directly.
-Drop `npx` from the commands on this page.
 
 ### With the shell installer
 
@@ -60,7 +61,7 @@ powershell -ExecutionPolicy Bypass -c "irm https://github.com/reuben-ssg/reuben/
 Print the version to confirm the command runs:
 
 ```sh
-npx reuben --version
+reuben --version
 ```
 
 It prints `reuben` and the version number, such as `reuben 0.2.0`.
@@ -130,7 +131,7 @@ my-site/
 Build the site into the `dist/` folder:
 
 ```sh
-npx reuben build
+reuben build
 ```
 
 Reuben prints a summary:
@@ -172,7 +173,7 @@ To change that, see [Theming](@/theming.md).
 Start the preview server:
 
 ```sh
-npx reuben serve
+reuben serve
 ```
 
 Reuben prints the address:
@@ -200,7 +201,7 @@ If another program already uses port 1111, Reuben prints this error:
 error: cannot listen on 127.0.0.1:1111: Address already in use (os error 48)
 ```
 
-Pick another port with `--port`, such as `npx reuben serve --port 4321`.
+Pick another port with `--port`, such as `reuben serve --port 4321`.
 Press Ctrl+C to stop the server.
 
 ## Check the site
@@ -208,7 +209,7 @@ Press Ctrl+C to stop the server.
 Check the site without writing anything:
 
 ```sh
-npx reuben check
+reuben check
 ```
 
 When the site is fine, Reuben prints:
