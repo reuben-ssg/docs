@@ -148,10 +148,11 @@ Found 12 accessibility findings in 1 file
 ```
 
 It exits with status 0 only when it finds no errors and no findings, and with status 1 otherwise.
-That makes it a gate for a CI job:
+That makes it a gate for a CI job.
+Installed with npm? [Run these with `npx` in front](@/quickstart.md#install-reuben), as in `npx reuben check`.
 
 ```sh
-npx reuben check
+reuben check
 ```
 
 Add `--drafts` to check draft pages too.
