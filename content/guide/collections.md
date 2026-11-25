@@ -117,7 +117,7 @@ A collection works like a list of pages, and it has a few extras:
 | `collections.blog[0]`                | One page, by position. An index past the end is an error.         |
 | `for post in collections.blog { }`   | Each page in order.                                               |
 | `collections.blog.pages`             | The pages as a list.                                              |
-| `collections.blog.tree`              | The folder structure as nested maps. See below.                   |
+| `collections.blog.tree`              | The folder structure as nested maps. Described below.                   |
 
 A collection also has three methods, and each gives a list:
 

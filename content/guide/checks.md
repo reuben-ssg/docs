@@ -219,4 +219,4 @@ No problems found in 1 page
 ```
 
 Broken source links such as `@/missing.md` are errors, not findings, so `a11y.disable` doesn't switch them off.
-See [Linking to pages](@/guide/linking.md).
+Refer to [Page links](@/guide/linking.md).

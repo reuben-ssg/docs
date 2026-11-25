@@ -665,6 +665,10 @@ pre code {
   max-width: 100%;
 }
 
+.hero-order .install + .install {
+  margin-top: 8px;
+}
+
 /* ---------- Logo ---------- */
 
 .logo {
