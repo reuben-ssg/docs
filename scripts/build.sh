@@ -3,14 +3,14 @@
 # Cloudflare Workers Builds entry point.
 #
 # Produces `dist/`, which wrangler.jsonc points at via `assets.directory`.
-# Runs in the Cloudflare build environment (Node.js and npm pre-installed).
+# Workers Builds runs `npm clean-install` before this script, so it doesn't.
 
 set -euo pipefail
 
-echo "Installing dependencies..."
-npm ci
-
 echo "Building the site..."
 npm run build
+
+# `.reuben-output` marks dist/ as Reuben's output folder; it isn't for visitors.
+printf '.reuben-output\n' > dist/.assetsignore
 
 echo "Build complete. Output: dist/"
