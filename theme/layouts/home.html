@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{ head(page, site) }}
+</head>
+<body class="home">
+{{ skip_link() }}
+{{ header(page, data) }}
+<div class="page has-sidebar">
+{{ site_nav(page, site, collections) }}
+<main id="main" tabindex="-1">
+{{ title_heading(page, content) }}
+{{ content }}
+{{ edit_link(page, site) }}
+</main>
+</div>
+{{ footer(site) }}
+</body>
+</html>

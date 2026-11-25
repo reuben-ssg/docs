@@ -1,0 +1,41 @@
+/* Palette tokens. Magenta never carries body or small text on Mustard; links use Deep magenta. */
+:root {
+  --mustard: #ffd21f;
+  --pumpernickel: #2a1420;
+  --magenta: #e0177a;
+  --deep-magenta: #b3005e;
+  --white: #ffffff;
+  --caraway: #5c4652;
+  --swiss: #fff3b8;
+  --dressing: #ec7a52;
+
+  /* Buttons read this token so an enhanced-contrast mode can swap it to --deep-magenta. */
+  --button-bg: var(--magenta);
+
+  --font-body: "Nunito", system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, monospace;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("../fonts/nunito-latin.woff2") format("woff2");
+  font-weight: 200 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Mono";
+  src: url("../fonts/dm-mono-400-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Mono";
+  src: url("../fonts/dm-mono-500-latin.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{ head(page, site) }}
+</head>
+<body>
+{{ skip_link() }}
+{{ header(page, data) }}
+<div class="page has-sidebar">
+{{ site_nav(page, site, collections) }}
+<main id="main" tabindex="-1">
+{{ breadcrumb(page, collections) }}
+{{ title_heading(page, content) }}
+<div class="page-body">
+{{ on_this_page(page) }}
+<div class="prose">
+{{ content }}
+</div>
+</div>
+{{ edit_link(page, site) }}
+</main>
+</div>
+{{ footer(site) }}
+</body>
+</html>
