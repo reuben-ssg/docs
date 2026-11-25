@@ -16,6 +16,7 @@ fn head(page, site) {
 ${description}<link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
 <link rel="icon" href="/img/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="preload" href="/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/tokens.css">
 <link rel="stylesheet" href="/css/components.css">
 <link rel="stylesheet" href="/css/syntax.css">`)
