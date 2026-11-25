@@ -4,13 +4,13 @@ weight: 1
 description: Put computed values into a page with output blocks and setup blocks.
 ---
 
-A Rhai block is a piece of code inside a page.
+A [Rhai](https://rhai.rs/book/) block is a piece of code inside a page.
 Reuben runs it when it builds the page and puts the result in its place.
-[Rhai](https://rhai.rs/book/) is the small scripting language Reuben uses.
+[Rhai](https://rhai.rs) is the small scripting language Reuben uses.
 You only need its expressions to start: numbers, text, lists, and field access such as `page.title`.
 The Rhai book covers the whole language.
 
-There are two kinds of block.
+There are two kinds of blocks.
 
 | Block              | What it does                                                         |
 | ------------------ | -------------------------------------------------------------------- |
@@ -105,8 +105,8 @@ Every block on a page can read these names:
 | ------------- | ---------------------------------------------------------------------- |
 | `page`        | The page's front matter and its computed fields, such as `page.url`.  |
 | `site`        | The site's `title`, `base_url`, and `params`.                           |
-| `data`        | The files in `data/`. See [Data](@/guide/data.md).                     |
-| `collections` | Every collection. See [Collections](@/guide/collections.md).           |
+| `data`        | The files in `data/`. Refer to [Data](@/guide/data.md).                     |
+| `collections` | Every collection. Refer to [Collections](@/guide/collections.md).           |
 
 A block can also use the variables the page's [sidecar script](@/guide/sidecars.md) sets, every function from [Includes](@/guide/includes.md), and these built-in helpers:
 
@@ -115,9 +115,9 @@ A block can also use the variables the page's [sidecar script](@/guide/sidecars.
 | `raw(text)`               | Marks text as HTML, so Reuben doesn't escape it.                              |
 | `escape(text)`            | Escapes `<`, `>`, `&`, and `"`, for text you put inside HTML you build by hand. |
 | `markdown(text)`          | Renders Markdown text as HTML. It doesn't run `{{ }}` blocks inside the text. |
-| `list.sort_by(field)`     | Sorts a list of maps, such as pages, by a field. Put `-` before the name to reverse it.      |
+| `list.sort_by(field)`     | Sorts a list of maps. `list` is any list of maps, such as a collection or `data.menu`, and `field` is the name of a key in each map, in quotes. Put `-` before the name to reverse the order, as in `collections.blog.sort_by("date")` or `data.menu.sort_by("-price")`. |
 | `load_data(path)`         | Reads a `.json`, `.toml`, `.yaml`, or `.yml` file inside the site.             |
-| `url_for(path)`           | Gives the URL of a page, from its source file. See [Linking to pages](@/guide/linking.md). |
+| `url_for(path)`           | Gives the URL of a page, from its source file. Refer to [Page links](@/guide/linking.md). |
 | `format_date(date, format)` | Formats a date, such as `format_date(page.date, "%B %Y")`.                  |
 
 ## Show a block without running it
@@ -171,12 +171,16 @@ A field that doesn't exist on a map is not an error.
 If a block prints nothing, run [`reuben explain`](@/guide/explain.md) to see which names the page has.
 
 Two limits keep a script from hanging a build.
-Reuben stops a block that does too much work, and it disables `eval`:
+Reuben stops a block that does too much work, and it blocks `eval`:
 
 ```text
 error: Too many operations
 error: reserved keyword 'eval' is disabled
 ```
+
+`eval` runs a string as code, so a page or data file could build and run code that the site's author never wrote out.
+Reuben blocks it so every script that runs is visible in the site's files.
+The message is Rhai's own wording.
 
 A script can print to the terminal while it runs.
 `print("hello")` writes the page's path and the text to Reuben's output, and it adds nothing to the page:

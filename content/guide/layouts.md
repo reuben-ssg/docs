@@ -66,8 +66,8 @@ A layout reads the same names as a page's blocks, and one more:
 | `content`     | The page's body as HTML.                                                 |
 | `page`        | The page's front matter and its computed fields.                         |
 | `site`        | The site's `title`, `base_url`, and `params`.                             |
-| `data`        | The files in `data/`. See [Data](@/guide/data.md).                       |
-| `collections` | Every collection. See [Collections](@/guide/collections.md).             |
+| `data`        | The files in `data/`. Refer to [Data](@/guide/data.md).                       |
+| `collections` | Every collection. Refer to [Collections](@/guide/collections.md).             |
 
 A layout also sees every variable the page's [sidecar script](@/guide/sidecars.md) and setup blocks created, and it can call every [include](@/guide/includes.md) function and built-in helper.
 

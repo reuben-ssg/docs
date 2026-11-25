@@ -1,9 +1,9 @@
 ---
 title: Quickstart
-description: Install Reuben, build a two-page site, preview it, and check it.
+description: Install Reuben, preview and build a two-page site, and check it.
 ---
 
-This page takes you from an empty folder to a built, previewed, and checked two-page site.
+This page takes you from an empty folder to a previewed, built, and checked two-page site.
 You need a terminal and a text editor.
 You don't need to know Rust or Rhai.
 
@@ -16,18 +16,11 @@ The other routes install the `reuben` command for your whole machine.
 ### With npm
 
 The npm route needs Node.js 14.18 or later.
-In a new folder for your site, create a `package.json` and add Reuben as a dev dependency:
-
-```sh
-mkdir my-site
-cd my-site
-npm init -y
-npm install --save-dev @reuben-ssg/reuben
-```
+It adds Reuben to your site's folder, so you run its two commands in [Create the site](#create-the-site), after you make the folder.
 
 The package installs the prebuilt `reuben` command.
 This page, and the rest of the docs, write each command as plain `reuben`.
-If you installed Reuben with npm, put `npx` in front of each command, such as `npx reuben build`.
+If you installed Reuben with npm, put `npx` in front of each command, such as `npx reuben serve`.
 `npm run` scripts work too.
 
 ### With Cargo
@@ -58,18 +51,33 @@ powershell -ExecutionPolicy Bypass -c "irm https://github.com/reuben-ssg/reuben/
 
 ### Check the install
 
-Print the version to confirm the command runs:
+If you chose npm, run this in your site folder after the next section's npm commands, as `npx reuben --version`.
+Otherwise, print the version to confirm the command runs:
 
 ```sh
 reuben --version
 ```
 
-It prints `reuben` and the version number, such as `reuben 0.2.0`.
+It prints `reuben` and the version number, which for this release is {{ data.release.version }}.
 
 ## Create the site
 
 A Reuben site is a folder with a `reuben.toml` file and a `content/` folder of pages.
-Make these three files in your site folder.
+Make the site folder, whichever route you chose, and move into it:
+
+```sh
+mkdir my-site
+cd my-site
+```
+
+If you installed with npm, create a `package.json` and add Reuben as a dev dependency inside the folder:
+
+```sh
+npm init -y
+npm install --save-dev @reuben-ssg/reuben
+```
+
+Then make these three files in your site folder.
 
 `reuben.toml`:
 
@@ -113,7 +121,7 @@ Here the result is the `title` from `reuben.toml`.
 A link that starts with `@/` names a page by its source file under `content/`.
 Reuben writes the page's real URL into the built site.
 If you rename or move the page, Reuben reports every link that no longer resolves.
-[Linking to pages](@/guide/linking.md) describes every form of source link.
+[Page links](@/guide/linking.md) describes every form of source link.
 
 With the npm route, your folder now looks like this, with `node_modules/` left out:
 
@@ -125,48 +133,6 @@ my-site/
 ├── package.json
 └── reuben.toml
 ```
-
-## Build the site
-
-Build the site into the `dist/` folder:
-
-```sh
-reuben build
-```
-
-Reuben prints a summary:
-
-```text
-Built 2 pages, copied 0 static files in 23ms
-```
-
-The time differs on your machine.
-
-Reuben writes no `sitemap.xml` unless you ask for one.
-When you know where the site will live, add `base_url = "https://example.com/"` and `sitemap = true` to `reuben.toml`.
-The [sitemap](@/configuration.md#sitemap) section of the configuration reference has the details.
-
-`dist/` now holds the built pages:
-
-```text
-dist/index.html
-dist/about/index.html
-```
-
-Reuben also writes a `.reuben-output` file into `dist/`.
-It marks the folder as Reuben's own, so a later build knows it can replace it.
-
-Open `dist/index.html`.
-The heading and the link are filled in:
-
-```html
-<h1 id="welcome-to-my-site">Welcome to My site</h1>
-<p>This page was built by Reuben.
-Read <a href="/about/">about this site</a>.</p>
-```
-
-The site has no layouts, so Reuben wraps each page in a plain built-in page shell.
-To change that, see [Theming](@/theming.md).
 
 ## Preview the site
 
@@ -204,6 +170,50 @@ error: cannot listen on 127.0.0.1:1111: Address already in use (os error 48)
 Pick another port with `--port`, such as `reuben serve --port 4321`.
 Press Ctrl+C to stop the server.
 
+The preview writes nothing to disk, so the next section builds the site into files.
+
+## Build the site
+
+With the preview stopped, build the site into the `dist/` folder:
+
+```sh
+reuben build
+```
+
+Reuben prints a summary:
+
+```text
+Built 2 pages, copied 0 static files in 23ms
+```
+
+The time differs on your machine.
+
+Reuben writes no `sitemap.xml` unless you ask for one.
+When you know where the site will live, add `base_url = "https://example.com/"` and `sitemap = true` to `reuben.toml`.
+The [sitemap](@/configuration.md#sitemap) section of the configuration reference has the details.
+
+`dist/` now holds the built pages:
+
+```text
+dist/index.html
+dist/about/index.html
+```
+
+Reuben also writes a `.reuben-output` file into `dist/`.
+It marks the folder as Reuben's own, so a later build knows it can replace it.
+
+Open `dist/index.html`.
+The heading and the link are filled in:
+
+```html
+<h1 id="welcome-to-my-site">Welcome to My site</h1>
+<p>This page was built by Reuben.
+Read <a href="/about/">about this site</a>.</p>
+```
+
+The site has no layouts, so Reuben wraps each page in a plain built-in page shell.
+To change that, check out [Theming](@/theming.md).
+
 ## Check the site
 
 Check the site without writing anything:
@@ -237,9 +247,9 @@ Change the link back before you go on.
 `reuben check` also reports [accessibility findings](@/guide/checks.md), such as a heading that skips a level.
 It exits with status 0 only when it finds no errors and no findings, so you can use it in a CI job.
 
-## Next steps
+## Learn more
 
 - The [Feature guide](@/guide/index.md) explains Rhai blocks, sidecar scripts, includes, data, collections, layouts, linking, and checks, each with an example.
-- [Explaining a page](@/guide/explain.md) shows how `reuben explain` lists every name a page can use and where each value came from.
+- [Explain a page](@/guide/explain.md) shows how `reuben explain` lists every name a page can use and where each value came from.
 - [Configuration](@/configuration.md) lists every `reuben.toml` key, every front matter field, and every command with its flags.
 - [Theming](@/theming.md) explains how to give the site its own layouts, includes, and static files.

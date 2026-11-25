@@ -106,6 +106,10 @@ The cheapest dish is the Pickle plate.</p>
 
 Reuben escapes the apostrophe in the shop's name as `&#39;`, which browsers show as `'`.
 
+The `#{ … }` in the script is Rhai's object-map syntax.
+It is a map literal: a list of `key: value` pairs between braces, such as `#{ name: "Ada", role: "Slicer" }`.
+The `#` tells Rhai it is a map and not a block of statements, so a bare `{ … }` doesn't work in its place.
+
 ## Read a file on demand
 
 The `load_data(path)` helper reads one data file from a script or a block.

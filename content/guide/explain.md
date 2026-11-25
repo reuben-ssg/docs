@@ -1,5 +1,5 @@
 ---
-title: Explaining a page
+title: Explain a page
 weight: 9
 description: List every name a page can use, with its value and the file and line that set it.
 ---

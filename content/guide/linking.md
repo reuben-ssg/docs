@@ -1,5 +1,5 @@
 ---
-title: Linking to pages
+title: Page links
 weight: 7
 description: Link to a page by its source file, so links keep working when a page moves.
 ---
@@ -12,7 +12,7 @@ Links then keep working when a page moves or its URL changes, and Reuben reports
 Use a normal Markdown link, and put a path to a `.md` file where the URL goes:
 
 ```markdown
-See the [scope guide](@/writing-guide/style/scope.md#assumptions).
+Refer to the [scope guide](@/writing-guide/style/scope.md#assumptions).
 ```
 
 Reuben builds that into `<a href="/writing-guide/style/scope/#assumptions">`.
@@ -38,7 +38,7 @@ This example site has a `base_url` of `https://example.test/sub/`.
 ```markdown
 Read the [introduction](@/guide/intro.md) or jump to its [setup section](@/guide/intro.md#setup).
 
-A relative link works too: see [the next page](guide/next.md).
+A relative link works too: visit [the next page](guide/next.md).
 
 A link with a query keeps it: [search](@/guide/intro.md?q=1).
 ```
@@ -58,7 +58,7 @@ The built `index.html` holds:
 
 ```html
 <p>Read the <a href="/sub/guide/intro/">introduction</a> or jump to its <a href="/sub/guide/intro/#setup">setup section</a>.</p>
-<p>A relative link works too: see <a href="/sub/guide/next/">the next page</a>.</p>
+<p>A relative link works too: visit <a href="/sub/guide/next/">the next page</a>.</p>
 <p>A link with a query keeps it: <a href="/sub/guide/intro/?q=1">search</a>.</p>
 ```
 
@@ -165,4 +165,4 @@ A `markdown()` link is still resolved, and a missing file there is an error, but
 
 Reuben also checks the built HTML for links that point at nothing, with the `link-target` accessibility rule.
 That rule covers links you wrote as plain URLs, such as `/about/`.
-See [Accessibility checks](@/guide/checks.md).
+Refer to [Accessibility checks](@/guide/checks.md).

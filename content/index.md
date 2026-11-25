@@ -18,12 +18,13 @@ Markdown with Rhai scripting stacked inside, every build error served in one run
 
 <div class="btn-row">
 <a class="btn" href="/quickstart/">Quickstart</a>
-<a class="btn btn-alt" href="#features">Why Reuben?</a>
+<a class="btn btn-alt" href="/why/">Why Reuben?</a>
 </div>
 </div>
 <div class="hero-order">
 <p class="order-label">Order your Reuben today:</p>
-<p class="install" tabindex="0" role="region" aria-label="Install command"><code>npm install --save-dev @reuben-ssg/reuben</code></p>
+<p class="install" tabindex="0" role="region" aria-label="Install with Cargo"><code>cargo install reuben</code></p>
+<p class="install" tabindex="0" role="region" aria-label="Install with npm"><code>npm install --save-dev @reuben-ssg/reuben</code></p>
 </div>
 </div>
 </div>

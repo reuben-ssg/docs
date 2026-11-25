@@ -6,7 +6,7 @@ sitemap = true
 [params]
 # Sidebar navigation, in order: a top-level folder (collection) or a root-level page, by slug.
 # Drafts and pages that don't exist yet are left out of the navigation.
-nav_order = ["why", "quickstart", "guide", "configuration", "theming", "add-ons", "contributing"]
+nav_order = ["why", "quickstart", "site-structure", "guide", "configuration", "cli", "theming", "add-ons", "contributing"]
 repo_url = "https://github.com/reuben-ssg/reuben"
 edit_url = "https://github.com/reuben-ssg/docs/edit/main/content/"
 license = "MIT OR Apache-2.0"
