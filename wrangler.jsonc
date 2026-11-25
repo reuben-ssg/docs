@@ -9,4 +9,7 @@
     "enabled": true,
   },
   "preview_urls": true,
+  // Worker Previews (`npx wrangler preview`, run for non-main branches) need this
+  // block to exist; the site has no bindings, so it stays empty.
+  "previews": {},
 }
