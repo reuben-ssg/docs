@@ -57,4 +57,4 @@ Licensed under either of
 - MIT license ([LICENSE-MIT](LICENSE-MIT) or <http://opensource.org/licenses/MIT>)
 
 at your option.
-The bundled fonts are under the SIL Open Font License; see the `*-OFL.txt` files in `static/fonts/`.
+The bundled fonts are under the SIL Open Font License; for the terms, refer to the `*-OFL.txt` files in `static/fonts/`.
