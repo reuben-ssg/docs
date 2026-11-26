@@ -1,7 +1,7 @@
 ---
 title: Reuben
 head_title: "Reuben: the tastiest static site generator"
-description: "The tastiest static site generator: Markdown with Rhai scripting, every build error in one run, accessibility checks on every build, and no JavaScript unless you add it."
+description: "The tastiest static site generator: Markdown with Rhai scripting, accessibility checks, and every build error in one run."
 layout: home
 ---
 
