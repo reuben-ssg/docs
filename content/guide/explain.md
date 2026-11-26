@@ -93,24 +93,24 @@ let cheapest = data.menu.sort_by("price")[0];
 ```text
 content/docs/order.md (/docs/order/)
 
-page.audience       "customers"                                                      content/docs/_dir.toml:1
-page.description    "How to place an order."                                         content/docs/order.md:4
-page.title          "Ordering"                                                       content/docs/order.md:2
-page.weight         2                                                                content/docs/order.md:3
-page.draft          false                                                            computed
-page.url            "/docs/order/"                                                   computed
-page.path           "docs/order.md"                                                  computed
-page.slug           "order"                                                          computed
-page.collection     "docs"                                                           computed
-page.toc            []                                                               computed
-site.title          "Deli docs"                                                      reuben.toml:1
-site.base_url       "https://deli.example/"                                          reuben.toml:2
-site.params.author  "Ada"                                                            reuben.toml:5
-data.menu           [2 items]                                                        data/menu.json
-collections.docs    1 page                                                           collection docs
-cheapest            #{"name": "Pickle plate", "price": 6}                            content/docs/order.rhai:1
-badge/1             (text)                                                           includes/badge.rhai:1
-helpers             raw, escape, markdown, sort_by, load_data, url_for, format_date  built-in
+page.audience       "customers"                                                             content/docs/_dir.toml:1
+page.description    "How to place an order."                                                content/docs/order.md:4
+page.title          "Ordering"                                                              content/docs/order.md:2
+page.weight         2                                                                       content/docs/order.md:3
+page.draft          false                                                                   computed
+page.url            "/docs/order/"                                                          computed
+page.path           "docs/order.md"                                                         computed
+page.slug           "order"                                                                 computed
+page.collection     "docs"                                                                  computed
+page.toc            []                                                                      computed
+site.title          "Deli docs"                                                             reuben.toml:1
+site.base_url       "https://deli.example/"                                                 reuben.toml:2
+site.params.author  "Ada"                                                                   reuben.toml:5
+data.menu           [2 items]                                                               data/menu.json
+collections.docs    1 page                                                                  collection docs
+cheapest            #{"name": "Pickle plate", "price": 6}                                   content/docs/order.rhai:1
+badge/1             (text)                                                                  includes/badge.rhai:1
+helpers             raw, escape, markdown, sort_by, load_data, url_for, format_date, asset  built-in
 ```
 
 The first line names the page's source file and its URL.
@@ -156,16 +156,16 @@ This is a page whose sidecar reads past the end of a list:
 ```text
 content/broken.md (/broken/)
 
-page.title       "Broken"                                                         content/broken.md:2
-page.draft       false                                                            computed
-page.url         "/broken/"                                                       computed
-page.path        "broken.md"                                                      computed
-page.slug        "broken"                                                         computed
-page.collection  ""                                                               computed
-page.toc         []                                                               computed
-site.title       ""                                                               computed
-site.base_url    "/"                                                              computed
-helpers          raw, escape, markdown, sort_by, load_data, url_for, format_date  built-in
+page.title       "Broken"                                                                content/broken.md:2
+page.draft       false                                                                   computed
+page.url         "/broken/"                                                              computed
+page.path        "broken.md"                                                             computed
+page.slug        "broken"                                                                computed
+page.collection  ""                                                                      computed
+page.toc         []                                                                      computed
+site.title       ""                                                                      computed
+site.base_url    "/"                                                                     computed
+helpers          raw, escape, markdown, sort_by, load_data, url_for, format_date, asset  built-in
 error: Array index 5 out of bounds: only 2 elements in array
   --> content/broken.rhai:2:18
   |

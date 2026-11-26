@@ -27,7 +27,10 @@ Reuben collects every independent error and reports them together, so you see al
 | `--out <OUT>`   | The output folder. It defaults to `<root>/dist`.                              |
 | `--drafts`      | Includes pages marked as drafts.                                              |
 | `--env <ENV>`   | Merges `reuben.<name>.toml` over `reuben.toml` if it exists.                  |
-| `--jobs <N>`    | Renders with this many threads. It defaults to one per core.                  |
+| `--jobs <N>`    | Reads, renders, and writes with this many threads.                            |
+
+Without `--jobs`, Reuben uses the performance cores on a Mac with Apple silicon and one thread per core elsewhere.
+Deleting the previous output after a build runs on up to four threads of its own, whatever `--jobs` says.
 
 A successful build prints a summary and exits with status 0:
 
@@ -61,7 +64,9 @@ It writes nothing to `dist/`.
 | `--port <PORT>` | The port to listen on, on 127.0.0.1 only. `0` picks a free one. Default `1111`. |
 | `--drafts`      | Includes pages marked as drafts.                                                |
 | `--env <ENV>`   | Merges `reuben.<name>.toml` over `reuben.toml` if it exists.                    |
-| `--jobs <N>`    | Renders with this many threads. It defaults to one per core.                    |
+| `--jobs <N>`    | Reads and renders with this many threads.                                       |
+
+Without `--jobs`, `reuben serve` picks its threads the same way as [`reuben build`](#reuben-build).
 
 Reuben prints the address when the server starts:
 
@@ -92,7 +97,9 @@ It prints every error and every accessibility finding, and then a summary line.
 | `--root <ROOT>` | The site root. Default `.`.                                  |
 | `--drafts`      | Includes pages marked as drafts.                             |
 | `--env <ENV>`   | Merges `reuben.<name>.toml` over `reuben.toml` if it exists. |
-| `--jobs <N>`    | Renders with this many threads. It defaults to one per core. |
+| `--jobs <N>`    | Reads and renders with this many threads.                    |
+
+Without `--jobs`, `reuben check` picks its threads the same way as [`reuben build`](#reuben-build).
 
 The command exits with status 0 only when it finds no errors and no findings, and with status 1 otherwise.
 That makes it suitable for CI.
@@ -134,21 +141,21 @@ The output is:
 ```text
 content/guide/intro.md (/guide/intro/)
 
-page.audience        "beginners"                                                      content/guide/_dir.toml:2
-page.description     "Start here."                                                    content/guide/intro.md:4
-page.title           "Intro"                                                          content/guide/intro.md:2
-page.weight          1                                                                content/guide/intro.md:3
-page.draft           false                                                            computed
-page.url             "/guide/intro/"                                                  computed
-page.path            "guide/intro.md"                                                 computed
-page.slug            "intro"                                                          computed
-page.collection      "docs"                                                           computed
-page.toc             [#{"id": "intro", "level": 1, "text": "Intro"}]                  computed
-site.title           "Deli"                                                           reuben.toml:1
-site.base_url        "https://example.com/"                                           reuben.toml:2
-site.params.tagline  "Stacked high"                                                   reuben.toml:5
-collections.docs     1 page                                                           collection docs
-helpers              raw, escape, markdown, sort_by, load_data, url_for, format_date  built-in
+page.audience        "beginners"                                                             content/guide/_dir.toml:2
+page.description     "Start here."                                                           content/guide/intro.md:4
+page.title           "Intro"                                                                 content/guide/intro.md:2
+page.weight          1                                                                       content/guide/intro.md:3
+page.draft           false                                                                   computed
+page.url             "/guide/intro/"                                                         computed
+page.path            "guide/intro.md"                                                        computed
+page.slug            "intro"                                                                 computed
+page.collection      "docs"                                                                  computed
+page.toc             [#{"id": "intro", "level": 1, "text": "Intro"}]                         computed
+site.title           "Deli"                                                                  reuben.toml:1
+site.base_url        "https://example.com/"                                                  reuben.toml:2
+site.params.tagline  "Stacked high"                                                          reuben.toml:5
+collections.docs     1 page                                                                  collection docs
+helpers              raw, escape, markdown, sort_by, load_data, url_for, format_date, asset  built-in
 ```
 
 If the site has errors, `reuben explain` prints them after the list and exits with status 1.

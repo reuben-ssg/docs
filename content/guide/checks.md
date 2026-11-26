@@ -29,7 +29,7 @@ You use the id in a finding and when you switch the rule off.
 | `main-landmark`     | The page has a main landmark.                                      |
 | `id-unique`         | No two elements on a page share an id.                             |
 | `form-label`        | Form controls have a label.                                        |
-| `link-target`       | Internal links point at a page or file that is built.              |
+| `link-target`       | Internal links and file references point at a page or file that is built. |
 
 The first five rules read the page's headings, links, images, and tables.
 The last seven read the built HTML, including your layout, so a layout is where you fix `html-lang`, `page-title`, `single-h1`, and `main-landmark`.
@@ -42,7 +42,9 @@ Some rules have details you can rely on:
 - `form-label` accepts a wrapping `<label>`, a `<label for>` that matches the control's `id`, and a non-blank `aria-label`, `aria-labelledby`, or `title`.
   It skips hidden, submit, reset, button, and image inputs, and disabled inputs.
 - `main-landmark` accepts a `<main>` element or a `role="main"`.
-- `link-target` checks links that point into your site, and it skips external links, `mailto:` links, and links that are only a `#fragment`.
+- `link-target` checks references that point into your site, and it skips external links, `mailto:` links, and links that are only a `#fragment`.
+  It checks `<a href>`, `<link href>`, and `src` and `srcset` on `img`, `source`, `script`, `video`, and `audio`.
+  The extra references are checked for every site, whether or not it uses [`[assets]`](@/configuration.md#assets).
 
 ## See the findings
 
@@ -158,6 +160,27 @@ reuben check
 Add `--drafts` to check draft pages too.
 Add `--env <name>` to check with `reuben.<name>.toml` merged in.
 A site with nothing to report prints `No problems found in 1 page`.
+
+## Fix a broken file reference
+
+The `link-target` rule used to look only at `<a href>`.
+It now also looks at the files a page loads, so a site with a broken `src`, `srcset`, or `<link href>` starts failing `reuben check` after you upgrade.
+The finding names the path that isn't built:
+
+```text
+warning[link-target]: references `/img/missing.png`, which isn't built
+  --> content/index.md (built as index.html, line 11)
+Found 1 accessibility finding in 1 file
+```
+
+To fix it, correct the path so it matches a built file, or add the missing file to `static/`.
+In a layout, use the [`asset()` helper](@/theming.md#link-to-static-files), which fails the build when a path is wrong.
+To turn the check off, add `link-target` to `a11y.disable`, as the next section shows:
+
+```toml
+[a11y]
+disable = ["link-target"]
+```
 
 ## Switch rules off
 

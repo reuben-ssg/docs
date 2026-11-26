@@ -118,6 +118,7 @@ A block can also use the variables the page's [sidecar script](@/guide/sidecars.
 | `list.sort_by(field)`     | Sorts a list of maps. `list` is any list of maps, such as a collection or `data.menu`, and `field` is the name of a key in each map, in quotes. Put `-` before the name to reverse the order, as in `collections.blog.sort_by("date")` or `data.menu.sort_by("-price")`. |
 | `load_data(path)`         | Reads a `.json`, `.toml`, `.yaml`, or `.yml` file inside the site.             |
 | `url_for(path)`           | Gives the URL of a page, from its source file. Refer to [Page links](@/guide/linking.md). |
+| `asset(path)`             | Gives the URL of a static file, hashed when `[assets] hash` is on. Refer to [Link to static files](@/theming.md#link-to-static-files). |
 | `format_date(date, format)` | Formats a date, such as `format_date(page.date, "%B %Y")`.                  |
 
 ## Show a block without running it
