@@ -134,21 +134,21 @@ The output is:
 ```text
 content/guide/intro.md (/guide/intro/)
 
-page.audience        "beginners"                                                      content/guide/_dir.toml:2
-page.description     "Start here."                                                    content/guide/intro.md:4
-page.title           "Intro"                                                          content/guide/intro.md:2
-page.weight          1                                                                content/guide/intro.md:3
-page.draft           false                                                            computed
-page.url             "/guide/intro/"                                                  computed
-page.path            "guide/intro.md"                                                 computed
-page.slug            "intro"                                                          computed
-page.collection      "docs"                                                           computed
-page.toc             [#{"id": "intro", "level": 1, "text": "Intro"}]                  computed
-site.title           "Deli"                                                           reuben.toml:1
-site.base_url        "https://example.com/"                                           reuben.toml:2
-site.params.tagline  "Stacked high"                                                   reuben.toml:5
-collections.docs     1 page                                                           collection docs
-helpers              raw, escape, markdown, sort_by, load_data, url_for, format_date  built-in
+page.audience        "beginners"                                                             content/guide/_dir.toml:2
+page.description     "Start here."                                                           content/guide/intro.md:4
+page.title           "Intro"                                                                 content/guide/intro.md:2
+page.weight          1                                                                       content/guide/intro.md:3
+page.draft           false                                                                   computed
+page.url             "/guide/intro/"                                                         computed
+page.path            "guide/intro.md"                                                        computed
+page.slug            "intro"                                                                 computed
+page.collection      "docs"                                                                  computed
+page.toc             [#{"id": "intro", "level": 1, "text": "Intro"}]                         computed
+site.title           "Deli"                                                                  reuben.toml:1
+site.base_url        "https://example.com/"                                                  reuben.toml:2
+site.params.tagline  "Stacked high"                                                          reuben.toml:5
+collections.docs     1 page                                                                  collection docs
+helpers              raw, escape, markdown, sort_by, load_data, url_for, format_date, asset  built-in
 ```
 
 If the site has errors, `reuben explain` prints them after the list and exits with status 1.

@@ -18,7 +18,7 @@ A site without one builds with the defaults in the table below.
 Reuben treats an unknown key as an error and names it, so a typo can't pass silently:
 
 ```text
-error: reuben.toml: config: unknown field `titel`, expected one of `title`, `base_url`, `theme`, `params`, `collections`, `sitemap`, `css`, `markdown`, `a11y`
+error: reuben.toml: config: unknown field `titel`, expected one of `title`, `base_url`, `theme`, `params`, `collections`, `sitemap`, `css`, `markdown`, `assets`, `a11y`
 Found 1 error in 1 file
 ```
 
@@ -32,6 +32,7 @@ Found 1 error in 1 file
 | `sitemap`     | true or false    | `false`      | Whether Reuben writes `sitemap.xml`.                                 |
 | `css`         | table            | see below    | How Reuben processes CSS files.                                      |
 | `markdown`    | table            | see below    | Which optional Markdown features Reuben turns on.                    |
+| `assets`      | table            | see below    | Whether Reuben hashes static file names and writes cache headers.    |
 | `a11y`        | table            | see below    | Which accessibility rules to switch off.                             |
 | `include`     | list of globs    | none         | More TOML files to merge into the configuration.                     |
 
@@ -171,6 +172,64 @@ targets = "last 2 versions"
 
 A `targets` query that Reuben can't read is an error that names `css.targets`.
 Unknown keys in `[css]` are errors too.
+
+### assets
+
+The `[assets]` table controls the names of your static files and the cache rules that go with them.
+Everything in it is off by default, so a site without the table builds as it always did.
+An unknown key in the table is a config error.
+
+```toml
+[assets]
+hash = true
+headers = true
+```
+
+| Key       | Type          | Default | What it does                                                              |
+| --------- | ------------- | ------- | ------------------------------------------------------------------------- |
+| `hash`    | true or false | `false` | Adds a hash of each static file's content to its name.                    |
+| `headers` | true or false | `false` | Writes a `_headers` file that tells the host to cache hashed files.       |
+| `keep`    | list of globs | empty   | Static files that keep their names even when `hash` is on.                |
+
+With `hash` on, Reuben renames each static file to `<stem>.<8-hex>.<ext>`, where the hex is a hash of the file's content.
+A file named `css/site.css` becomes something like `css/site.d3c65ad5.css`.
+A changed file gets a new name, so a browser can keep the old one for as long as it likes.
+The [`asset()` helper](@/theming.md#link-to-static-files) gives a template the current name, and Reuben rewrites each `url()` in your CSS to match.
+
+Some files keep their names, because browsers and hosts ask for them by name:
+
+- Static files at the root of `static/`, such as `robots.txt` and `favicon.ico`.
+- Everything under `.well-known/`.
+- Files that match a glob in `keep`.
+
+A `keep` glob is relative to the merged `static/` folder, after the site's files have replaced the theme's.
+For example, `keep = ["fonts/*.woff2"]` leaves every font in `static/fonts/` under its own name.
+Pages, `sitemap.xml`, and the other files Reuben builds are never renamed.
+
+With `headers` on, Reuben writes a `_headers` file in the output.
+Each hashed file gets `Cache-Control: public, max-age=31536000, immutable`, which lets a browser keep it for a year.
+When every file in a folder is hashed, one rule covers the folder, and otherwise each hashed file gets its own rule.
+Cloudflare Workers, Cloudflare Pages, and Netlify read this file.
+If your `static/` folder has its own `_headers`, Reuben keeps it and adds its rules after yours.
+A site with `base_url = "https://example.com/docs/"` gets rules that start with `/docs/`.
+
+Two settings are config errors, because without them hashing isn't safe or `headers` has nothing to cache:
+
+```text
+error: reuben.toml: config: assets: `headers = true` needs `hash = true`
+```
+
+```text
+error: reuben.toml: config: assets: `hash = true` needs `[css] bundle = true`
+```
+
+A host limits a `_headers` file to 100 rules, and Reuben reports an error if the file would need more:
+
+```text
+error: reuben.toml: config: `_headers` would need 122 rules; Cloudflare allows 100
+```
+
+To get under the limit, add `keep` globs for files that don't need a long cache.
 
 ### a11y
 

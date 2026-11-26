@@ -25,11 +25,13 @@ If you installed Reuben with npm, put `npx` in front of each command, such as `n
 
 ### With Cargo
 
-`cargo install` compiles Reuben from source, so it needs Rust 1.85 or later:
+`cargo install` compiles Reuben from source, so it needs Rust 1.100 or later:
 
 ```sh
 cargo install reuben
 ```
+
+If `cargo install` says your Rust is too old, run `rustup update` and try again.
 
 With this route, and with the installers below, you run `reuben` directly.
 

@@ -136,6 +136,71 @@ Then fenced code blocks in a known language build with `hl-` classes on their to
 Run `reuben css highlight` and save the output in your theme's `static/` folder to style those classes.
 [Configuration](@/configuration.md#markdown) describes the setting, and [`reuben css highlight`](@/cli.md#reuben-css-highlight) lists the built-in color themes.
 
+## Link to static files
+
+A theme should link to its CSS, fonts, and images with the `asset()` helper, not with a literal path.
+`asset()` takes a path inside `static/` and gives back the file's URL.
+This is how the layout above would link `theme/static/css/site.css`:
+
+```html
+<link rel="stylesheet" href="{{ asset("css/site.css") }}">
+```
+
+Without hashing, which is the default, the helper gives the plain path:
+
+```html
+<link rel="stylesheet" href="/css/site.css">
+```
+
+With `hash = true` in the [`[assets]` table](@/configuration.md#assets), it gives the hashed name:
+
+```html
+<link rel="stylesheet" href="/css/site.d3c65ad5.css">
+```
+
+The theme's layout doesn't change when a site turns hashing on, so a theme that uses `asset()` works for both kinds of site.
+`asset("css/site.css")` and `asset("/css/site.css")` name the same file.
+The URL is root-relative and starts with the path part of `base_url`, so a site served from `/docs/` gets `/docs/css/site.css`.
+Root-level static files and `.well-known/` files keep their names even when hashing is on, and `asset()` gives their plain paths.
+
+`asset()` also checks the path.
+A path that matches no static file is a build error that names the layout, and the build reports every such error at once:
+
+```text
+error: layouts/default.html: asset `css/nope.css` isn't a static file
+Found 1 error in 1 file
+```
+
+With hashing on, Reuben also rewrites each `url()` in your CSS, so a stylesheet finds the hashed fonts and images it uses.
+That includes the `url()` values inside `image-set()`.
+For a stylesheet like this:
+
+```css
+body{background:url(../img/bg.png)}
+.hero{background-image:image-set(url(../img/bg.png) 1x,url(../img/bg2.png) 2x)}
+```
+
+The built stylesheet points at the hashed names:
+
+```css
+body{background:url(/img/bg.c87eb228.png)}.hero{background-image:-webkit-image-set(url(/img/bg.c87eb228.png) 1x,url(/img/bg2.b0e5639d.png) 2x);background-image:image-set("/img/bg.c87eb228.png" 1x,"/img/bg2.b0e5639d.png" 2x)}
+```
+
+A `url()` that points at no static file is an error, and it names the file, line, and column:
+
+```text
+error: `url(../img/gone.png)` isn't a static file
+  --> static/css/site.css:3:15
+  |
+3 | .a{background:url(../img/gone.png)}
+  |               ^
+Found 1 error in 1 file
+```
+
+Reuben leaves `url()` values alone when they are remote URLs, `data:` URLs, or fragments such as `url(#id)`.
+While hashing is on, a stylesheet can't name another stylesheet with `asset()` or `url()`.
+Use `@import` instead, because `[css] bundle` inlines it.
+
 ## Build with the theme
 
 Build the site as usual.
