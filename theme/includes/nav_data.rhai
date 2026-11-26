@@ -15,11 +15,18 @@ fn site_path(site, url) {
 }
 
 // A label for a root-level page, which belongs to no collection, so its title isn't visible to layouts.
-fn label_from_slug(slug) {
+// `nav_labels` in [params] names one outright (`cli = "CLI"`); otherwise the slug's hyphens become spaces and its
+// first letter a capital (`site-structure` reads "Site structure").
+fn label_from_slug(site, slug) {
+    if "nav_labels" in site.params && slug in site.params.nav_labels {
+        return site.params.nav_labels[slug];
+    }
     if slug.len() == 0 {
         return slug;
     }
-    slug.sub_string(0, 1).to_upper() + slug.sub_string(1)
+    let words = slug;
+    words.replace("-", " ");
+    words.sub_string(0, 1).to_upper() + words.sub_string(1)
 }
 
 // The page a folder's tree node was built from, for front matter the tree doesn't carry.
@@ -50,7 +57,7 @@ fn nav_items(site, collections) {
             let title = tree.title;
             if url == "" {
                 url = c.pages[0].url;
-                title = label_from_slug(slug);
+                title = label_from_slug(site, slug);
             } else {
                 let index = index_page(c, url);
                 if type_of(index) == "map" && "nav_title" in index && type_of(index.nav_title) == "string" {
@@ -65,7 +72,7 @@ fn nav_items(site, collections) {
             } catch {
             }
             if type_of(url) == "string" {
-                items.push(#{ slug: slug, url: url, title: label_from_slug(slug), section: false });
+                items.push(#{ slug: slug, url: url, title: label_from_slug(site, slug), section: false });
             }
         }
     }
