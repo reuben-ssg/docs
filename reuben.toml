@@ -7,9 +7,14 @@ sitemap = true
 # Sidebar navigation, in order: a top-level folder (collection) or a root-level page, by slug.
 # Drafts and pages that don't exist yet are left out of the navigation.
 nav_order = ["why", "quickstart", "site-structure", "guide", "configuration", "cli", "theming", "add-ons", "contributing"]
+# Sidebar labels for root-level pages whose slug doesn't read right with a capital first letter.
+nav_labels = { cli = "CLI" }
 repo_url = "https://github.com/reuben-ssg/reuben"
 edit_url = "https://github.com/reuben-ssg/docs/edit/main/content/"
 license = "MIT OR Apache-2.0"
+# The image link previews show when a page is shared (1200 by 630, in static/img/).
+og_image = "/img/og.png"
+og_image_alt = "The Reuben logo and a Reuben sandwich on mustard yellow, with the words: The tastiest static site generator."
 
 # The guide's pages set `weight`, which orders the sidebar.
 [collections.guide]

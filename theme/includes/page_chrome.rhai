@@ -1,19 +1,53 @@
 // The document head, page title, site sidebar, breadcrumb, "on this page" list and footer.
 
 fn head(page, site) {
+    // `head_title` in front matter replaces the whole <title>, for pages such as a home page.
     let title = escape(site.title);
-    if page.title != "" && page.title != site.title {
+    if type_of(page.head_title) == "string" && page.head_title != "" {
+        title = escape(page.head_title);
+    } else if page.title != "" && page.title != site.title {
         title = escape(page.title) + " · " + title;
     }
-    let description = "";
-    if type_of(page.description) == "string" && page.description != "" {
-        description = `<meta name="description" content="${escape(page.description)}">
+    let base = site.base_url;
+    while base.ends_with("/") {
+        base.pop();
+    }
+    let url = escape(base + page.url);
+    let kind = if page.url == "/" { "website" } else { "article" };
+    let meta = `<link rel="canonical" href="${url}">
+<meta property="og:site_name" content="${escape(site.title)}">
+<meta property="og:title" content="${title}">
+<meta property="og:url" content="${url}">
+<meta property="og:type" content="${kind}">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
 `;
+    if type_of(page.description) == "string" && page.description != "" {
+        let d = escape(page.description);
+        meta += `<meta name="description" content="${d}">
+<meta property="og:description" content="${d}">
+`;
+    }
+    // A site-wide share image: `og_image` (a root-relative path) and its `og_image_alt` text in [params].
+    if "og_image" in site.params {
+        let image = escape(base + site.params.og_image);
+        meta += `<meta property="og:image" content="${image}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="${image}">
+`;
+        if "og_image_alt" in site.params {
+            let alt = escape(site.params.og_image_alt);
+            meta += `<meta property="og:image:alt" content="${alt}">
+<meta name="twitter:image:alt" content="${alt}">
+`;
+        }
     }
     raw(`<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${title}</title>
-${description}<link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
+${meta}<meta name="theme-color" content="#ffd21f">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
 <link rel="icon" href="/img/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <link rel="preload" href="/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>

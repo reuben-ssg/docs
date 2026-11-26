@@ -30,8 +30,9 @@ Extract when the Tokyo Night theme (`reuben-ssg/theme-nvim`) exists, so there ar
 - A page inside a top-level `content/` folder also gets a breadcrumb.
 - A page with three or more `h2`s gets an "on this page" list.
 - The layout adds the page title as the `h1` unless the body has its own.
-- `[params]` keys the theme reads: `nav_order` (collection or root-level page slugs, in order), `repo_url` and `license` (footer), and `edit_url` (an "Edit this page on GitHub" link: the URL up to and including the content folder, to which the theme appends each page's path; no link when it's unset).
-- A collection's index page can set `nav_title` to shorten its sidebar heading; a root-level page's link is its slug with a capital first letter.
+- `[params]` keys the theme reads: `nav_order` (collection or root-level page slugs, in order), `nav_labels` (sidebar labels for root-level pages by slug, such as `{ cli = "CLI" }`), `repo_url` and `license` (footer), `edit_url` (an "Edit this page on GitHub" link: the URL up to and including the content folder, to which the theme appends each page's path; no link when it's unset), and `og_image` with `og_image_alt` (a root-relative path to a 1200 by 630 image that link previews show, and its alternative text).
+- A collection's index page can set `nav_title` to shorten its sidebar heading; a root-level page's link is its `nav_labels` entry, or else its slug with hyphens as spaces and a capital first letter.
+- Every page gets a canonical URL, OpenGraph and Twitter card tags built from `base_url`, its title and its `description`; a page can set `head_title` to replace its whole `<title>`.
 - `data/release.toml` `version` fills the "Now serving" ticket.
 - Includes for content: `logo()` and `sandwich()`.
 - `logo()` uses the id prefix `logo` and the header brand uses `brand`, so call `logo()` once per page; `logo_svg(prefix)` takes a prefix of your own for more.
