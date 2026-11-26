@@ -23,3 +23,9 @@ sort = "weight"
 # Highlight fenced code with `hl-` classes; the theme ships `theme/static/css/syntax.css` for them.
 [markdown]
 highlight = true
+
+# Hash static file names and write `_headers` so browsers cache the hashed files for a year.
+# Hashing needs `[css] bundle`, which is on by default.
+[assets]
+hash = true
+headers = true

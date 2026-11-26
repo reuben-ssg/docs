@@ -30,7 +30,17 @@ fn head(page, site) {
     }
     // A site-wide share image: `og_image` (a root-relative path) and its `og_image_alt` text in [params].
     if "og_image" in site.params {
-        let image = escape(base + site.params.og_image);
+        // `asset()` gives a root-relative URL that already starts with the path of `base_url`,
+        // so it goes after the origin alone, which keeps the share image a full URL.
+        let origin = base;
+        let scheme_end = origin.index_of("://");
+        if scheme_end >= 0 {
+            let path_start = origin.index_of("/", scheme_end + 3);
+            if path_start >= 0 {
+                origin = origin.sub_string(0, path_start);
+            }
+        }
+        let image = escape(origin + asset(site.params.og_image));
         meta += `<meta property="og:image" content="${image}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -47,13 +57,13 @@ fn head(page, site) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${title}</title>
 ${meta}<meta name="theme-color" content="#ffd21f">
-<link rel="icon" href="/img/favicon.svg" type="image/svg+xml" sizes="any">
-<link rel="icon" href="/img/favicon-32.png" type="image/png" sizes="32x32">
-<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-<link rel="preload" href="/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/tokens.css">
-<link rel="stylesheet" href="/css/components.css">
-<link rel="stylesheet" href="/css/syntax.css">`)
+<link rel="icon" href="${asset("img/favicon.svg")}" type="image/svg+xml" sizes="any">
+<link rel="icon" href="${asset("img/favicon-32.png")}" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="${asset("img/apple-touch-icon.png")}">
+<link rel="preload" href="${asset("fonts/nunito-latin.woff2")}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="${asset("css/tokens.css")}">
+<link rel="stylesheet" href="${asset("css/components.css")}">
+<link rel="stylesheet" href="${asset("css/syntax.css")}">`)
 }
 
 // The page title as the one h1, unless the body already has its own.
