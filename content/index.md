@@ -1,7 +1,24 @@
 ---
 title: Reuben
+head_title: "Reuben: the tastiest static site generator"
+description: "The tastiest static site generator: Markdown with Rhai scripting, every build error in one run, accessibility checks on every build, and no JavaScript unless you add it."
 layout: home
 ---
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Reuben",
+  "description": "A static site generator: Markdown with Rhai scripting, every build error in one run, accessibility checks on every build, and no JavaScript unless you add it.",
+  "url": "https://reuben-ssg.dev/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "macOS, Linux, Windows",
+  "license": "https://github.com/reuben-ssg/reuben/blob/main/LICENSE-MIT",
+  "codeRepository": "https://github.com/reuben-ssg/reuben",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
 
 <div class="hero">
 <div class="hero-art">
