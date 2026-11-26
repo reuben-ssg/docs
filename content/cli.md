@@ -27,7 +27,10 @@ Reuben collects every independent error and reports them together, so you see al
 | `--out <OUT>`   | The output folder. It defaults to `<root>/dist`.                              |
 | `--drafts`      | Includes pages marked as drafts.                                              |
 | `--env <ENV>`   | Merges `reuben.<name>.toml` over `reuben.toml` if it exists.                  |
-| `--jobs <N>`    | Renders with this many threads. It defaults to one per core.                  |
+| `--jobs <N>`    | Reads, renders, and writes with this many threads.                            |
+
+Without `--jobs`, Reuben uses the performance cores on a Mac with Apple silicon and one thread per core elsewhere.
+Deleting the previous output after a build runs on up to four threads of its own, whatever `--jobs` says.
 
 A successful build prints a summary and exits with status 0:
 
@@ -61,7 +64,9 @@ It writes nothing to `dist/`.
 | `--port <PORT>` | The port to listen on, on 127.0.0.1 only. `0` picks a free one. Default `1111`. |
 | `--drafts`      | Includes pages marked as drafts.                                                |
 | `--env <ENV>`   | Merges `reuben.<name>.toml` over `reuben.toml` if it exists.                    |
-| `--jobs <N>`    | Renders with this many threads. It defaults to one per core.                    |
+| `--jobs <N>`    | Reads and renders with this many threads.                                       |
+
+Without `--jobs`, `reuben serve` picks its threads the same way as [`reuben build`](#reuben-build).
 
 Reuben prints the address when the server starts:
 
@@ -92,7 +97,9 @@ It prints every error and every accessibility finding, and then a summary line.
 | `--root <ROOT>` | The site root. Default `.`.                                  |
 | `--drafts`      | Includes pages marked as drafts.                             |
 | `--env <ENV>`   | Merges `reuben.<name>.toml` over `reuben.toml` if it exists. |
-| `--jobs <N>`    | Renders with this many threads. It defaults to one per core. |
+| `--jobs <N>`    | Reads and renders with this many threads.                    |
+
+Without `--jobs`, `reuben check` picks its threads the same way as [`reuben build`](#reuben-build).
 
 The command exits with status 0 only when it finds no errors and no findings, and with status 1 otherwise.
 That makes it suitable for CI.

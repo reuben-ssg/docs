@@ -164,10 +164,14 @@ The URL is root-relative and starts with the path part of `base_url`, so a site 
 Root-level static files and `.well-known/` files keep their names even when hashing is on, and `asset()` gives their plain paths.
 
 `asset()` also checks the path.
-A path that matches no static file is a build error that names the layout, and the build reports every such error at once:
+A path that matches no static file is a build error that names the layout, line, and column, and the build reports every such error at once:
 
 ```text
-error: layouts/default.html: asset `css/nope.css` isn't a static file
+error: asset `css/missing.css` isn't a static file
+  --> layouts/default.html:6:33
+  |
+6 | <link rel="stylesheet" href="{{ asset("css/missing.css") }}">
+  |                                 ^
 Found 1 error in 1 file
 ```
 
