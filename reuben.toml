@@ -14,7 +14,7 @@ edit_url = "https://github.com/reuben-ssg/docs/edit/main/content/"
 license = "MIT OR Apache-2.0"
 # The image link previews show when a page is shared (1200 by 630, in static/img/).
 og_image = "/img/og.png"
-og_image_alt = "The Reuben logo and a Reuben sandwich on mustard yellow, with the words: The tastiest static site generator."
+og_image_alt = "The Reuben logo and a Reuben sandwich on mustard yellow, with the words: The tastiest static site generator. Get started at reuben-ssg.dev/quickstart."
 
 # The guide's pages set `weight`, which orders the sidebar.
 [collections.guide]
