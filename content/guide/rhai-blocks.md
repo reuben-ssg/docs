@@ -97,6 +97,35 @@ Use `raw()` only on markup you wrote.
 It skips the escaping that protects the page from stray `<` and `&` characters.
 To turn Markdown text into HTML, use the `markdown()` helper, which the [Sidecar scripts](@/guide/sidecars.md) page shows.
 
+### Line breaks in backtick strings
+
+Backtick strings are handy for HTML because they can hold `${ }` expressions and double quotes, but Rhai doesn't process escapes such as `\n` inside them.
+A `\n` stays a backslash followed by `n`:
+
+```markdown
+{{ raw(`<pre>a\nb</pre>`) }}
+```
+
+```html
+<pre>a\nb</pre>
+```
+
+For a line break, put a real one inside the backticks, or use a double-quoted string, where `\n` works:
+
+```markdown
+{{ raw(`<pre>a
+b</pre>`) }}
+
+{{ raw("<pre>a\nb</pre>") }}
+```
+
+Both output the same HTML:
+
+```html
+<pre>a
+b</pre>
+```
+
 ## What a block can use
 
 Every block on a page can read these names:
