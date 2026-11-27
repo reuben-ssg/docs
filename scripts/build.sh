@@ -10,8 +10,7 @@ set -euo pipefail
 echo "Building the site..."
 npm run build
 
-# `.reuben-output` marks dist/ as Reuben's output folder; it isn't for visitors.
-# Reuben writes `dist/_headers` itself (`[assets] headers = true`), so the script doesn't.
-printf '.reuben-output\n' > dist/.assetsignore
+# Reuben writes `dist/_headers` itself (`[assets] headers = true`), and since 0.3.1 it keeps its
+# `.dist.reuben-output` marker beside dist/ rather than in it, so nothing needs hiding from visitors.
 
 echo "Build complete. Output: dist/"

@@ -397,15 +397,18 @@ main {
   box-shadow: 5px 5px 0 var(--pumpernickel);
 }
 
-.prose table {
-  display: block;
+/* Reuben wraps each Markdown table in a focusable `.table-wrap`; the wrapper scrolls, so keyboard users can reach it. */
+.prose .table-wrap {
   max-width: 100%;
   overflow-x: auto;
-  border-collapse: collapse;
   background: var(--white);
   border: 3px solid var(--pumpernickel);
   border-radius: 14px;
   box-shadow: 5px 5px 0 var(--pumpernickel);
+}
+
+.prose table {
+  border-collapse: collapse;
 }
 
 .prose th,
